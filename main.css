@@ -1,0 +1,10 @@
+body {
+    background-color: sandybrown;
+  }
+
+h1 {
+      text-align: center;
+      color:cyan;
+      border: solid;
+      border-color: rgb(184, 31, 77);
+  }
