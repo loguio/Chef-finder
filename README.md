@@ -40,7 +40,31 @@ php -S localhost:8000 -t public
 ```
 
 
+## Commandes Utiles
 
+
+-- MakerBundle --
+
+Commandes permettant de générer une entité :
+
+```bash
+php bin/console make:entity [NomEntité]
+```
+
+
+-- Migrations --
+
+Générer un fichier de migration :
+
+```bash
+php bin/console make:migration
+```
+
+Exécuter les migrations :
+
+```bash
+php bin/console doctrine:migrations:migrate
+```
 
 
 
