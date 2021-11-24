@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}Connexion à l'application{% endblock %}
+{% block title %}Créer un compte{% endblock %}
 {% block body %}
     <style>
 
@@ -8,7 +8,7 @@
         body {
             font-family: "Poppins", sans-serif;
             height: 100vh;
-            background-color: #ceffd8;
+            background-color: #ade3ff;
         }
 
         a {
@@ -63,7 +63,7 @@
 
         h2.active {
             color: #0d0d0d;
-            border-bottom: 2px solid #5fe99d;
+            border-bottom: 2px solid #5fbae9;
         }
 
 
@@ -71,7 +71,7 @@
         /* FORM TYPOGRAPHY*/
 
         input[type=button], button[type=submit], input[type=reset]  {
-            background-color: #56ed81;
+            background-color: #56baed;
             border: none;
             color: white;
             padding: 15px 80px;
@@ -80,8 +80,8 @@
             display: inline-block;
             text-transform: uppercase;
             font-size: 13px;
-            -webkit-box-shadow: 0 10px 30px 0 rgba(95, 233, 157, 0.4);
-            box-shadow: 0 10px 30px 0 rgba(95, 233, 157, 0.4);
+            -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+            box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
             -webkit-border-radius: 5px 5px 5px 5px;
             border-radius: 5px 5px 5px 5px;
             margin: 5px 20px 40px 20px;
@@ -93,7 +93,7 @@
         }
 
         input[type=button]:hover, button[type=submit]:hover, input[type=reset]:hover  {
-            background-color: #39e773;
+            background-color: #39ace7;
         }
 
         input[type=button]:active, button[type=submit]:active, input[type=reset]:active  {
@@ -104,7 +104,7 @@
             transform: scale(0.95);
         }
 
-        input[type=text], input[type=password], input[type=email] {
+        input[type=text], input[type=password]{
             background-color: #f6f6f6;
             border: none;
             color: #0d0d0d;
@@ -125,12 +125,12 @@
             border-radius: 5px 5px 5px 5px;
         }
 
-        input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+        input[type=text]:focus, input[type=password]:focus {
             background-color: #fff;
-            border-bottom: 2px solid #5fe966;
+            border-bottom: 2px solid #5fbae9;
         }
 
-        input[type=text]::placeholder, input[type=password]::placeholder, input[type=email]::placeholder {
+        input[type=text]::placeholder, input[type=password]::placeholder {
             color: #cccccc;
         }
 
@@ -221,18 +221,19 @@
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <div class="fadeIn first">
-                {#<img src="{{ asset('build/images/horizon_logo_b_v.png') }}" id="loginFormIcon" alt="Logo Horizon" style="width: 163px;" />#}
+                {# <img src="{{ asset('build/images/horizon_logo_b.png') }}" id="loginFormIcon" alt="Logo Horizon" style="width: 163px;" /> #}
             </div>
             <form method="post">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
-                {% if app.user %} {# si customer connecté #}
-                    {% if is_granted('ROLE_CUSTOMER') %} {# test si a ROLE_CUSTOMER #}
+                {% if app.user %} {# si user connecté #}
+                    {% if is_granted('ROLE_CHIEF') %} {# test si a ROLE_CHIEF #}
                         <div class="card">
                             <div class="card-title">Vous êtes déja connecté !</div>
                             <div class="card-body">
-                                <a href="{{ path('app_customer_logout') }}" class="btn btn-primary">Déconnexion</a>
+                                <a href="{{ path('app_home') }}" class="btn btn-success">Accueil</a>
+                                <a href="{{ path('app_chief_logout') }}" class="btn btn-primary">Déconnexion</a>
                             </div>
                         </div>
                     {% endif %}

@@ -10,12 +10,20 @@ app_customer_login:
   path: /login
   methods: GET
 
+app_customer_register:
+  path: /register
+  methods: GET
+
 app_customer_logout:
   path: /logout
   methods: GET
 
 app_chief_login:
   path: /pro/login
+  methods: GET
+
+app_chief_register:
+  path: /pro/logout
   methods: GET
 
 app_chief_logout:

@@ -238,7 +238,7 @@
                         </div>
                     {% endif %}
                 {% else %}
-                    <input type="text" id="inputUsername" class="fadeIn second" name="username" placeholder="Nom d'utilisateur" required autofocus>
+                    <input type="text" id="inputEmail" class="fadeIn second" name="email" placeholder="Adresse Email" required>
                     <input type="password" id="inputPassword" class="fadeIn third" name="password" placeholder="Mot de passe" required>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     <button type="submit" class="fadeIn fourth">Valider</button>

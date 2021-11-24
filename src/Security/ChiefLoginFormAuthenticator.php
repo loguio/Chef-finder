@@ -48,13 +48,13 @@ class ChiefLoginFormAuthenticator extends AbstractFormLoginAuthenticator impleme
     public function getCredentials(Request $request): array
     {
         $credentials = [
-            'username' => $request->request->get('username'),
+            'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $credentials['username']
+            $credentials['email']
         );
 
         return $credentials;
@@ -67,12 +67,12 @@ class ChiefLoginFormAuthenticator extends AbstractFormLoginAuthenticator impleme
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(UserChief::class)->findOneBy(['username' => $credentials['username']]);
+        $user = $this->entityManager->getRepository(UserChief::class)->findOneBy(['email' => $credentials['email']]);
 
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Username could not be found.');
+            throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
         return $user;

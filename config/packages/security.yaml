@@ -41,7 +41,7 @@ security:
                 # where to redirect after logout
                 target: app_chief_login
         customer:
-            pattern: /|
+            pattern: /login|/logout
             lazy: true
             provider: app_customer_provider
             guard:
@@ -52,8 +52,6 @@ security:
                 invalidate_session: false
                 # where to redirect after logout
                 target: app_customer_login
-        main:
-            anonymous: true
 
         # activate different ways to authenticate
         # https://symfony.com/doc/current/security.html#the-firewall
@@ -69,5 +67,4 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/, roles: ROLE_USER }
         - { path: ^/admin-panel/*, roles: ROLE_ADMIN }
