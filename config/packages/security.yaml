@@ -1,27 +1,73 @@
 security:
+    encoders:
+        App\Entity\UserChief:
+            algorithm: auto
+
+        App\Entity\UserCustomer:
+            algorithm: auto
+
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+
     providers:
-        users_in_memory: { memory: null }
+        app_chief_provider:
+            entity:
+                class: App\Entity\UserChief
+                property: email
+
+        app_customer_provider:
+            entity:
+                class: App\Entity\UserCustomer
+                property: email
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
+        chief:
+            pattern: /pro/login|/pro/logout
             lazy: true
-            provider: users_in_memory
+            provider: app_chief_provider
+            guard:
+                authenticators:
+                    - App\Security\ChiefLoginFormAuthenticator
+            logout:
+                path: app_chief_logout
+                invalidate_session: false
+                # where to redirect after logout
+                target: app_chief_login
+        customer:
+            pattern: /|
+            lazy: true
+            provider: app_customer_provider
+            guard:
+                authenticators:
+                    - App\Security\CustomerLoginFormAuthenticator
+            logout:
+                path: app_customer_logout
+                invalidate_session: false
+                # where to redirect after logout
+                target: app_customer_login
+        main:
+            anonymous: true
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
+        # activate different ways to authenticate
+        # https://symfony.com/doc/current/security.html#the-firewall
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+        # https://symfony.com/doc/current/security/impersonating_user.html
+        # switch_user: true
 
+    role_hierarchy:
+        ROLE_CHIEF: [ROLE_USER]
+        ROLE_CUSTOMER: [ROLE_USER]
+        ROLE_ADMIN: [ROLE_USER, ROLE_CHIEF, ROLE_CUSTOMER]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/, roles: ROLE_USER }
+        - { path: ^/admin-panel/*, roles: ROLE_ADMIN }
