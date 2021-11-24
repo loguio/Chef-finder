@@ -32,6 +32,13 @@ Afin de compiler et build le projet pour un environnement de production :
 npm run build
 ```
 
+Afin de démarrer le serveur intégré à PHP en local :
+
+
+```bash
+php -S localhost:8000 -t public
+```
+
 
 
 
