@@ -51,6 +51,11 @@ Commandes permettant de générer une entité :
 php bin/console make:entity [NomEntité]
 ```
 
+Commandes permettant de générer un controlleur :
+
+```bash
+php bin/console make:controller [NomControlleur]
+```
 
 -- Migrations --
 
