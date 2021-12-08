@@ -10,3 +10,5 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+import 'bootstrap';  // js-file
+import 'bootstrap/dist/css/bootstrap.css'; // css file
