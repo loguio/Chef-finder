@@ -2,9 +2,14 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+
+# Home --------------------------
+
 app_home:
   path: /
   methods: GET
+
+# Customer --------------------------
 
 app_customer_login:
   path: /login
@@ -18,12 +23,14 @@ app_customer_logout:
   path: /logout
   methods: GET
 
+# Chief --------------------------
+
 app_chief_login:
   path: /pro/login
   methods: GET
 
 app_chief_register:
-  path: /pro/logout
+  path: /pro/register
   methods: GET
 
 app_chief_logout:

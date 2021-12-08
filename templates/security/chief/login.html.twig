@@ -221,7 +221,7 @@
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <div class="fadeIn first">
-                {# <img src="{{ asset('build/images/horizon_logo_b.png') }}" id="loginFormIcon" alt="Logo Horizon" style="width: 163px;" /> #}
+                {# <img src="{{ asset('build/images/horizon_logo_b.png') }}" id="loginFormIcon" alt="Logo ChieFinder" style="width: 163px;" /> #}
             </div>
             <form method="post">
                 {% if error %}
@@ -239,9 +239,10 @@
                     {% endif %}
                 {% else %}
                     <input type="text" id="inputEmail" class="fadeIn second" name="email" placeholder="Adresse Email" required>
-                    <input type="password" id="inputPassword" class="fadeIn third" name="password" placeholder="Mot de passe" required>
+                    <input type="password" id="inputPassword" class="fadeIn second" name="password" placeholder="Mot de passe" required>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                    <button type="submit" class="fadeIn fourth">Valider</button>
+                    <button type="submit" class="fadeIn second mb-1">Valider</button>
+                    <div class="fadeIn second my-2">Ou créer un compte</div>
                 {% endif %}
             </form>
         </div>
