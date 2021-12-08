@@ -108,7 +108,7 @@
             background-color: #f6f6f6;
             border: none;
             color: #0d0d0d;
-            padding: 15px 32px;
+            padding: 10px 32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -220,8 +220,8 @@
 
     <div class="wrapper fadeInDown">
         <div id="formContent">
-            <div class="fadeIn first">
-                {#<img src="{{ asset('build/images/horizon_logo_b_v.png') }}" id="loginFormIcon" alt="Logo ChieFinder" style="width: 163px;" />#}
+            <div class="fadeIn first my-3">
+                <img src="{{ asset('build/images/logo-full.png') }}" id="loginFormIcon" alt="Logo ChieFinder" style="width: 110px;" />
             </div>
             <form method="post">
                 {% if error %}
@@ -232,15 +232,17 @@
                         <div class="card">
                             <div class="card-title">Vous êtes déja connecté !</div>
                             <div class="card-body">
+                                <a href="{{ path('app_home') }}" class="btn btn-success">Accueil</a>
                                 <a href="{{ path('app_customer_logout') }}" class="btn btn-primary">Déconnexion</a>
                             </div>
                         </div>
                     {% endif %}
                 {% else %}
-                    <input type="text" id="inputEmail" class="fadeIn second" name="email" placeholder="Adresse Email" required>
-                    <input type="password" id="inputPassword" class="fadeIn third" name="password" placeholder="Mot de passe" required>
+                    <input type="email" id="inputEmail" class="fadeIn second" name="email" placeholder="Adresse Email" required>
+                    <input type="password" id="inputPassword" class="fadeIn second" name="password" placeholder="Mot de passe" required>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                    <button type="submit" class="fadeIn fourth">Valider</button>
+                    <button type="submit" class="fadeIn second mt-3 mb-0">Valider</button>
+                    <a href="{{ path('app_customer_register') }}" class="fadeIn second my-2 nav-link text-success">Ou créer un compte</a>
                 {% endif %}
             </form>
         </div>

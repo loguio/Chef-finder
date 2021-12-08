@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}Créer un compte chef{% endblock %}
+{% block title %}Créer un compte client{% endblock %}
 {% block body %}
     <style>
 
@@ -230,21 +230,20 @@
                             <div class="card-title">Vous êtes déja connecté !</div>
                             <div class="card-body">
                                 <a href="{{ path('app_chief_login') }}" class="btn btn-success">Retour à la connexion</a>
-                                <a href="{{ path('app_chief_logout') }}" class="btn btn-primary">Déconnexion</a>
+                                <a href="{{ path('app_logout') }}" class="btn btn-primary">Déconnexion</a>
                             </div>
                         </div>
                     {% endif %}
                 {% else %}
-                    {{ form_start(userChiefAddForm) }}
-                        {{ form_row(userChiefAddForm.firstName) }}
-                        {{ form_row(userChiefAddForm.lastName) }}
-                        {{ form_row(userChiefAddForm.email) }}
-                        {{ form_row(userChiefAddForm.phoneNumber) }}
-                        {{ form_row(userChiefAddForm.company) }}
-                        {{ form_row(userChiefAddForm.password) }}
-                        {{ form_row(userChiefAddForm.confirmPassword) }}
+                    {{ form_start(userCustomerAddForm) }}
+                        {{ form_row(userCustomerAddForm.firstName) }}
+                        {{ form_row(userCustomerAddForm.lastName) }}
+                        {{ form_row(userCustomerAddForm.email) }}
+                        {{ form_row(userCustomerAddForm.phoneNumber) }}
+                        {{ form_row(userCustomerAddForm.password) }}
+                        {{ form_row(userCustomerAddForm.confirmPassword) }}
                         <button type="submit" class="fadeIn second my-4">Valider</button>
-                    {{ form_end(userChiefAddForm) }}
+                    {{ form_end(userCustomerAddForm) }}
                 {% endif %}
             </form>
         </div>

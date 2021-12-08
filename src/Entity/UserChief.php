@@ -55,7 +55,7 @@ class UserChief
     private $bookings;
 
     /**
-     * @ORM\OneToMany(targetEntity=live::class, mappedBy="userChief", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Live::class, mappedBy="userChief", orphanRemoval=true)
      */
     private $lives;
 
@@ -173,29 +173,29 @@ class UserChief
     }
 
     /**
-     * @return Collection|live[]
+     * @return Collection|Live[]
      */
     public function getLives(): Collection
     {
         return $this->lives;
     }
 
-    public function addLife(live $life): self
+    public function addLive(Live $live): self
     {
-        if (!$this->lives->contains($life)) {
-            $this->lives[] = $life;
-            $life->setUserChief($this);
+        if (!$this->lives->contains($live)) {
+            $this->lives[] = $live;
+            $live->setUserChief($this);
         }
 
         return $this;
     }
 
-    public function removeLife(live $life): self
+    public function removeLive(Live $live): self
     {
-        if ($this->lives->removeElement($life)) {
+        if ($this->lives->removeElement($live)) {
             // set the owning side to null (unless already changed)
-            if ($life->getUserChief() === $this) {
-                $life->setUserChief(null);
+            if ($live->getUserChief() === $this) {
+                $live->setUserChief(null);
             }
         }
 

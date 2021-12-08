@@ -50,7 +50,7 @@ class UserCustomer
     private $bookings;
 
     /**
-     * @ORM\OneToOne(targetEntity=liveViewer::class, inversedBy="userCustomer", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=LiveViewer::class, inversedBy="userCustomer", cascade={"persist", "remove"})
      */
     private $liveViewer;
 
@@ -154,12 +154,12 @@ class UserCustomer
         return $this;
     }
 
-    public function getLiveViewer(): ?liveViewer
+    public function getLiveViewer(): ?LiveViewer
     {
         return $this->liveViewer;
     }
 
-    public function setLiveViewer(?liveViewer $liveViewer): self
+    public function setLiveViewer(?LiveViewer $liveViewer): self
     {
         $this->liveViewer = $liveViewer;
 
