@@ -241,6 +241,9 @@
                         {{ form_row(userCustomerAddForm.email) }}
                         {{ form_row(userCustomerAddForm.phoneNumber) }}
                         {{ form_row(userCustomerAddForm.password) }}
+                        {% if errors.pwd_confirm is defined %}
+                            <label for="user_customer_register[confirmPassword]" class="small text-danger">{{ errors.pwd_confirm }}</label>
+                        {% endif %}
                         {{ form_row(userCustomerAddForm.confirmPassword) }}
                         <button type="submit" class="fadeIn second my-4">Valider</button>
                     {{ form_end(userCustomerAddForm) }}

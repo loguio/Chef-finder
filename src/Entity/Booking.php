@@ -64,16 +64,16 @@ class Booking
     private $linkedOrder;
 
     /**
-     * @ORM\ManyToOne(targetEntity=userChief::class, inversedBy="bookings")
+     * @ORM\ManyToOne(targetEntity=UserChief::class, inversedBy="bookings")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Chief;
+    private $chief;
 
     /**
-     * @ORM\ManyToOne(targetEntity=userCustomer::class, inversedBy="bookings")
+     * @ORM\ManyToOne(targetEntity=UserCustomer::class, inversedBy="bookings")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Customer;
+    private $customer;
 
     public function getId(): ?int
     {
@@ -193,12 +193,12 @@ class Booking
         return $this;
     }
 
-    public function getChief(): ?userChief
+    public function getChief(): ?UserChief
     {
         return $this->Chief;
     }
 
-    public function setChief(?userChief $Chief): self
+    public function setChief(?UserChief $Chief): self
     {
         $this->Chief = $Chief;
 

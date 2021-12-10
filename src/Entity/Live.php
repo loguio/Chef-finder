@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\LiveRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -51,7 +52,7 @@ class Live
     private $userChief;
 
     /**
-     * @ORM\OneToMany(targetEntity=liveViewer::class, mappedBy="live", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=LiveViewer::class, mappedBy="live", orphanRemoval=true)
      */
     private $liveViewers;
 
@@ -89,12 +90,12 @@ class Live
         return $this;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function getStartDate(): ?DateTimeInterface
     {
         return $this->startDate;
     }
 
-    public function setStartDate(\DateTimeInterface $startDate): self
+    public function setStartDate(DateTimeInterface $startDate): self
     {
         $this->startDate = $startDate;
 
@@ -138,14 +139,14 @@ class Live
     }
 
     /**
-     * @return Collection|liveViewer[]
+     * @return Collection|LiveViewer[]
      */
     public function getLiveViewers(): Collection
     {
         return $this->liveViewers;
     }
 
-    public function addLiveViewer(liveViewer $liveViewer): self
+    public function addLiveViewer(LiveViewer $liveViewer): self
     {
         if (!$this->liveViewers->contains($liveViewer)) {
             $this->liveViewers[] = $liveViewer;
@@ -155,7 +156,7 @@ class Live
         return $this;
     }
 
-    public function removeLiveViewer(liveViewer $liveViewer): self
+    public function removeLiveViewer(LiveViewer $liveViewer): self
     {
         if ($this->liveViewers->removeElement($liveViewer)) {
             // set the owning side to null (unless already changed)

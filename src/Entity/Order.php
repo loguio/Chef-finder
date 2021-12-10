@@ -29,7 +29,7 @@ class Order
     private $status;
 
     /**
-     * @ORM\OneToOne(targetEntity=booking::class, inversedBy="linkedOrder", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Booking::class, inversedBy="linkedOrder", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $booking;
@@ -63,12 +63,12 @@ class Order
         return $this;
     }
 
-    public function getBooking(): ?booking
+    public function getBooking(): ?Booking
     {
         return $this->booking;
     }
 
-    public function setBooking(booking $booking): self
+    public function setBooking(Booking $booking): self
     {
         $this->booking = $booking;
 

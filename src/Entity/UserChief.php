@@ -50,7 +50,7 @@ class UserChief
     private $company;
 
     /**
-     * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="Chief", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="chief", orphanRemoval=true)
      */
     private $bookings;
 

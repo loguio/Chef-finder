@@ -45,7 +45,7 @@ class UserCustomer
     private $phoneNumber;
 
     /**
-     * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="Customer", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="customer", orphanRemoval=true)
      */
     private $bookings;
 

@@ -41,12 +41,12 @@ class Box
     private $foodCategory;
 
     /**
-     * @ORM\ManyToMany(targetEntity=product::class, inversedBy="boxes")
+     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="boxes")
      */
     private $products;
 
     /**
-     * @ORM\OneToMany(targetEntity=booking::class, mappedBy="box", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="box", orphanRemoval=true)
      */
     private $bookings;
 
@@ -110,14 +110,14 @@ class Box
     }
 
     /**
-     * @return Collection|product[]
+     * @return Collection|Product[]
      */
     public function getProducts(): Collection
     {
         return $this->products;
     }
 
-    public function addProduct(product $product): self
+    public function addProduct(Product $product): self
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
@@ -126,7 +126,7 @@ class Box
         return $this;
     }
 
-    public function removeProduct(product $product): self
+    public function removeProduct(Product $product): self
     {
         $this->products->removeElement($product);
 
@@ -134,14 +134,14 @@ class Box
     }
 
     /**
-     * @return Collection|booking[]
+     * @return Collection|Booking[]
      */
     public function getBookings(): Collection
     {
         return $this->bookings;
     }
 
-    public function addBooking(booking $booking): self
+    public function addBooking(Booking $booking): self
     {
         if (!$this->bookings->contains($booking)) {
             $this->bookings[] = $booking;
@@ -151,7 +151,7 @@ class Box
         return $this;
     }
 
-    public function removeBooking(booking $booking): self
+    public function removeBooking(Booking $booking): self
     {
         if ($this->bookings->removeElement($booking)) {
             // set the owning side to null (unless already changed)
