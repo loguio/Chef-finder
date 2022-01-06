@@ -3,13 +3,13 @@
 #    controller: App\Controller\DefaultController::index
 
 
-# Home --------------------------
+# Home --------------------------------------------------------
 
 app_home:
   path: /
   methods: GET
 
-# Customer --------------------------
+# Customer -----------------------------------------------------
 
 app_customer_login:
   path: /login
@@ -23,7 +23,11 @@ app_customer_logout:
   path: /logout
   methods: GET
 
-# Chief --------------------------
+# Chief --------------------------------------------------------
+
+app_chief_list:
+  path: /chefs
+  methods: GET
 
 app_chief_login:
   path: /pro/login
@@ -37,3 +41,22 @@ app_chief_logout:
   path: /pro/logout
   methods: GET
 
+# Orders -------------------------------------------------------
+
+app_orders:
+  path: /reservations
+  methods: GET
+
+app_cart:
+  path: /panier
+  methods: GET
+
+# Miscellaneous ------------------------------------------------
+
+app_about_us:
+  path: /qui-sommes-nous
+  methods: GET
+
+app_contact:
+  path: /contact
+  methods: GET

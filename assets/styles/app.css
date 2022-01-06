@@ -1,3 +1,78 @@
-body {
-    background-color: lightgray;
+@import '~bootstrap';
+@import '/node_modules/@fortawesome/fontawesome-free/css/all.css';
+
+/* Common */
+
+
+@font-face {
+    font-family: 'Abel';
+    src: url('../fonts/Abel/Abel-Regular.eot');
+    src: url('../fonts/Abel/Abel-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Abel/Abel-Regular.woff2') format('woff2'),
+    url('../fonts/Abel/Abel-Regular.woff') format('woff'),
+    url('../fonts/Abel/Abel-Regular.ttf') format('truetype'),
+    url('../fonts/Abel/Abel-Regular.svg#Abel-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
+
+body {
+    height: 100%;
+    font-family: "Abel", serif;
+    background: linear-gradient(90deg, rgb(221,221,221) 40%, rgb(243,243,243) 40%);
+}
+
+
+/* Navbar */
+
+#NavLoginBtn {
+    border-radius: 20px;
+    background-color: #979797 !important;
+}
+
+#NavLoginBtn:hover {
+    background-color: #cbcaca !important;
+    color: #6a6969 !important;
+}
+
+.app .nav-item a {
+    color: #979797 !important;
+}
+
+.app .nav-item a:hover, .menuItemDot {
+    color: #746f6f !important;
+}
+
+.app .nav-item a:hover ~ .menuItemDot {
+    visibility: visible;
+}
+
+.menuItemDot {
+    font-size: x-small;
+    visibility: hidden;
+}
+
+/* Sidebar */
+
+#sidebar {
+    right: 0;
+    background-color: #C4C4C4;
+    border-radius: 20px;
+}
+
+#sidebar div {
+    background-color: #DDDDDD;
+    border-radius: 10px;
+}
+
+#sidebar div:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+#sidebar i {
+    color: #A39B9B;
+}
+
+/* Home */
