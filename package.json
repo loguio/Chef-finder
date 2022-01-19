@@ -26,6 +26,7 @@
         "jquery-slotmachine": "^4.0.2",
         "jquery-ui": "^1.12.1",
         "jquery-ui-bundle": "^1.12.1-migrate",
-        "popper.js": "^1.16.1"
+        "popper.js": "^1.16.1",
+        "swiper": "^7.4.1"
     }
 }
