@@ -12,3 +12,9 @@ import './styles/app.css';
 import './bootstrap';
 import 'bootstrap';  // js-file
 import 'bootstrap/dist/css/bootstrap.css'; // css file
+
+
+// import Swiper bundle with all modules installed
+import Swiper from 'swiper/bundle';
+// import styles bundle
+import 'swiper/css/bundle';

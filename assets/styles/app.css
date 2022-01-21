@@ -26,6 +26,10 @@ body {
 
 /* Navbar */
 
+#navbar, #sidebar {
+    z-index: 2;
+}
+
 #NavLoginBtn {
     border-radius: 20px;
     background-color: #979797 !important;
@@ -55,24 +59,38 @@ body {
 
 /* Sidebar */
 
-#sidebar {
-    right: 0;
+.swiper-pagination {
     background-color: #C4C4C4;
     border-radius: 20px;
+    margin-top: 2rem;
 }
 
-#sidebar div {
-    background-color: #DDDDDD;
-    border-radius: 10px;
-}
-
-#sidebar div:hover {
-    background-color: white;
+.swiper-pagination-bullet:hover {
+    background-color: #FFF;
     cursor: pointer;
 }
 
-#sidebar i {
-    color: #A39B9B;
+
+.swiper-pagination-bullet-active .sidebarIcon, .swiper-pagination-bullet:hover .sidebarIcon {
+    background-color: #EFAF00;
+}
+
+.swiper-pagination-bullet {
+    height: revert;
+    background-color: #eaeaea;
+    border-radius: 10px;
+    width: revert;
+    opacity: 1;
+    padding: 8px;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #FFF;
+}
+
+.sidebarIcon {
+    padding: 1rem;
+    background-color: #c3c3c3;
 }
 
 /* Home */

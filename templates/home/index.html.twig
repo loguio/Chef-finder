@@ -1,15 +1,23 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('home') }}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
 
 <div class="app">
-    <nav class="mx-5 mt-4">
-        <div class="d-flex justify-content-between">
+    <nav class="position-absolute w-100" id="navbar">
+        <div class="d-flex justify-content-between mx-5">
             <div class="d-flex align-items-end">
                 <div id="logo" class="navbar-brand mr-5">
-                    <img src="{{ asset('build/images/logo-full.png') }}" alt="Logo ChieFinder" style="width: 110px;"/>
+                    <img src="{{ asset('build/images/logo.svg') }}" alt="Logo ChieFinder" style="width: 60px;"/>
                 </div>
                 <div class="nav-item mx-2 mb-2 text-center">
                     <a class="nav-link font-weight-bold pb-0" href="{{ path('app_orders') }}">Réservation</a>
@@ -36,21 +44,19 @@
             </div>
         </div>
     </nav>
-    <div class="addressContent">
-        <div class="bouton">
-
+    <div class="vh-100 swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide bg-success">Slide 1</div>
+            <div class="swiper-slide bg-warning">Slide 2</div>
+            <div class="swiper-slide bg-secondary">Slide 3</div>
+            <div class="swiper-slide bg-success">Slide 4</div>
+            <div class="swiper-slide bg-info">Slide 5</div>
+            <div class="swiper-slide bg-warning">Slide 6</div>
+            <div class="swiper-slide bg-success">Slide 7</div>
+            <div class="swiper-slide bg-success">Slide 8</div>
+            <div class="swiper-slide bg-success">Slide 9</div>
         </div>
-    </div>
-    <div id="sidebar" class="position-absolute mr-4">
-        <div class="m-3"><i class="fas fa-hamburger fa-2x p-2"></i></div>
-        <div class="m-3"><i class="fas fa-hamburger fa-2x p-2"></i></div>
-        <div class="m-3"><i class="fas fa-hamburger fa-2x p-2"></i></div>
-        <div class="m-3"><i class="fas fa-hamburger fa-2x p-2"></i></div>
-        <div class="m-3"><i class="fas fa-hamburger fa-2x p-2"></i></div>
-        <div class="m-3"><i class="fas fa-hamburger fa-2x p-2"></i></div>
-        <div class="m-3"><i class="fas fa-hamburger fa-2x p-2"></i></div>
-        <div class="m-3"><i class="fas fa-hamburger fa-2x p-2"></i></div>
-        <div class="m-3"><i class="fas fa-hamburger fa-2x p-2"></i></div>
+        <div class="swiper-pagination mr-3"></div>
     </div>
 </div>
 
