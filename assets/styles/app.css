@@ -15,6 +15,7 @@ body {
 
 #navbar, #sidebar {
     z-index: 2;
+    background-color: #F7F3EF;
 }
 
 #NavLoginBtn {
@@ -61,6 +62,7 @@ body {
     top: revert !important;
     transform: initial !important;
     box-shadow: -25px 0 39px -25px rgb(177 177 177 / 25%);
+    opacity: 0;
 }
 
 .swiper-pagination-bullet:hover {
@@ -95,7 +97,21 @@ body {
 
 #socialIcons {
     bottom: 0;
+    margin-left: 8%;
+}
+
+#socialIcons a {
+    color: #A39B9B;
+    font-size: 21px;
+}
+
+#socialIcons i:hover {
+    color: #EFAF00;
 }
 
 
 /* Home */
+
+.swpSlideContainer {
+    margin-left: 6%;
+}

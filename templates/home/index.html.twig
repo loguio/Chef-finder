@@ -13,55 +13,26 @@
 {% block body %}
 
 <div class="app">
-    <nav class="position-absolute w-100" id="navbar">
-        <div class="d-flex justify-content-between mx-5">
-            <div class="d-flex align-items-end">
-                <div id="logo" class="navbar-brand mr-5">
-                    <a href="{{ path('app_home') }}">
-                        <img src="{{ asset('build/images/logo.svg') }}" alt="Logo ChieFinder" title="Logo" style="width: 60px;"/>
-                    </a>
-                </div>
-                <div class="nav-item mx-2 mb-2 text-center">
-                    <a class="nav-link pb-0" href="{{ path('app_orders') }}">Réservation</a>
-                    <i class="fas fa-circle text-center menuItemDot"></i>
-                </div>
-                <div class="nav-item mx-2 mb-2 text-center">
-                    <a class="nav-link pb-0" href="{{ path('app_chief_list') }}">Les chefs</a>
-                    <i class="fas fa-circle text-center menuItemDot"></i>
-                </div>
-                <div class="nav-item mx-2 mb-2 text-center">
-                    <a class="nav-link pb-0" href="{{ path('app_about_us') }}">Qui sommes-nous ?</a>
-                    <i class="fas fa-circle text-center menuItemDot"></i>
-                </div>
-                <div class="nav-item mx-2 mb-2 text-center">
-                    <a class="nav-link pb-0" href="{{ path('app_contact') }}">Contact</a>
-                    <i class="fas fa-circle text-center menuItemDot"></i>
-                </div>
-            </div>
-            <div class="d-flex align-items-center">
-                <a class="nav-item mr-4" href="{{ path('app_cart') }}" id="NavCartBtn">
-                    <img src="{{ asset('build/images/cart.svg') }}" alt="Panier" title="Panier">
-                </a>
-                <a class="btn my-auto px-4 py-2" id="NavLoginBtn" href="{{ path('app_customer_login') }}" title="Connexion">Connexion</a>
-            </div>
-        </div>
-    </nav>
+    {{ include('layout/navbar/index.html.twig') }}
     <div class="vh-100 swiper mySwiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">Slide 1</div>
-            <div class="swiper-slide">Slide 2</div>
-            <div class="swiper-slide">Slide 3</div>
-            <div class="swiper-slide">Slide 4</div>
-            <div class="swiper-slide">Slide 5</div>
-            <div class="swiper-slide">Slide 6</div>
-            <div class="swiper-slide">Slide 7</div>
-            <div class="swiper-slide">Slide 8</div>
-            <div class="swiper-slide">Slide 9</div>
+            {{ include('home/slides/hello.html.twig') }}
+            {{ include('home/slides/presentation.html.twig') }}
+            {{ include('home/slides/cookingtypes.html.twig') }}
+            {{ include('home/slides/recipes.html.twig') }}
+            {{ include('home/slides/chiefs.html.twig') }}
+            {{ include('home/slides/calendar.html.twig') }}
+            {{ include('home/slides/summary.html.twig') }}
+            {{ include('home/slides/payment.html.twig') }}
+            {{ include('home/slides/confirm.html.twig') }}
         </div>
         <div class="swiper-pagination col-1 d-flex flex-column justify-content-around"></div>
     </div>
-    <div class="position-absolute" id="socialIcons">
-        test
+    <div class="position-absolute mb-1" id="socialIcons" style="z-index: 1">
+        <a href="https://facebook.com" class="mx-2" title="Page Facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://instagram.com" class="mx-2" title="Page Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://linkedin.com" class="mx-2" title="Page Linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://youtube.com" class="mx-2" title="Chaine Youtube"><i class="fa-brands fa-youtube"></i></a>
     </div>
 </div>
 

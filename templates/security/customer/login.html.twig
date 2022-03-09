@@ -8,11 +8,11 @@
         body {
             font-family: "Poppins", sans-serif;
             height: 100vh;
-            background-color: #ceffd8;
+            background-color: #ffb34459;
         }
 
         a {
-            color: #92badd;
+            color: #a77228 !important;
             display:inline-block;
             text-decoration: none;
             font-weight: 400;
@@ -55,6 +55,10 @@
             text-align: center;
         }
 
+        .nav-link:hover {
+            color: #b9680b !important;
+        }
+
         /* TABS */
 
         h2.inactive {
@@ -63,7 +67,7 @@
 
         h2.active {
             color: #0d0d0d;
-            border-bottom: 2px solid #5fe99d;
+            border-bottom: 2px solid #5fbae9;
         }
 
 
@@ -71,7 +75,7 @@
         /* FORM TYPOGRAPHY*/
 
         input[type=button], button[type=submit], input[type=reset]  {
-            background-color: #56ed81;
+            background-color: #edaa56de;
             border: none;
             color: white;
             padding: 15px 80px;
@@ -80,8 +84,8 @@
             display: inline-block;
             text-transform: uppercase;
             font-size: 13px;
-            -webkit-box-shadow: 0 10px 30px 0 rgba(95, 233, 157, 0.4);
-            box-shadow: 0 10px 30px 0 rgba(95, 233, 157, 0.4);
+            -webkit-box-shadow: 0 10px 30px 0 #e9bf5f66;
+            box-shadow: 0 10px 30px 0 #e9bf5f66;
             -webkit-border-radius: 5px 5px 5px 5px;
             border-radius: 5px 5px 5px 5px;
             margin: 5px 20px 40px 20px;
@@ -93,7 +97,7 @@
         }
 
         input[type=button]:hover, button[type=submit]:hover, input[type=reset]:hover  {
-            background-color: #39e773;
+            background-color: #ef862ce0;
         }
 
         input[type=button]:active, button[type=submit]:active, input[type=reset]:active  {
@@ -127,7 +131,7 @@
 
         input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
             background-color: #fff;
-            border-bottom: 2px solid #5fe966;
+            border-bottom: 2px solid #e9cb5f;
         }
 
         input[type=text]::placeholder, input[type=password]::placeholder, input[type=email]::placeholder {
@@ -242,7 +246,7 @@
                     <input type="password" id="inputPassword" class="fadeIn second" name="password" placeholder="Mot de passe" required>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     <button type="submit" class="fadeIn second mt-3 mb-0">Valider</button>
-                    <a href="{{ path('app_customer_register') }}" class="fadeIn second my-2 nav-link text-success">Ou créer un compte</a>
+                    <a href="{{ path('app_customer_register') }}" class="fadeIn second my-2 nav-link">Ou créer un compte</a>
                 {% endif %}
             </form>
         </div>
