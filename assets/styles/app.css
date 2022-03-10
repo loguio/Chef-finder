@@ -63,6 +63,7 @@ body {
     transform: initial !important;
     box-shadow: -25px 0 39px -25px rgb(177 177 177 / 25%);
     opacity: 0;
+    background: #F7F3EF;
 }
 
 .swiper-pagination-bullet:hover {
@@ -97,7 +98,8 @@ body {
 
 #socialIcons {
     bottom: 0;
-    margin-left: 8%;
+    padding-left: 8%;
+    background-color: #F7F3EF;
 }
 
 #socialIcons a {
@@ -114,4 +116,17 @@ body {
 
 .swpSlideContainer {
     margin-left: 6%;
+}
+
+/* Hello */
+
+.btnBookChief {
+    font-family: Roboto, serif;
+    font-size: 14px;
+    line-height: 16px;
+    color: #F7F3EF;
+    padding: 13px 27px;
+    background: #EFAF00;
+    border-radius: 4px;
+    width: fit-content;
 }

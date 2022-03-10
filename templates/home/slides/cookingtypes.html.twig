@@ -1,5 +1,124 @@
+<style>
+    .text1 {
+        font-style: normal;
+        font-weight: 800;
+        font-size: 27px;
+        line-height: 113.7%;
+        color: #4E4E4E;
+    }
+
+    .cardTitle {
+        font-family: Sofia Pro, serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 113.7%;
+    }
+
+    .cardText {
+        font-family: Roboto, serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        color: #A39B9B;
+        opacity: 0.5;
+    }
+
+    .choiceCard {
+        background: rgba(239, 175, 0, 0.1);
+        border-radius: 4px;
+    }
+
+    .choiceCard:hover {
+        cursor: pointer;
+        background: rgba(239, 175, 0, 0.2);
+    }
+
+    .choiceCard.active {
+        background: rgba(239, 175, 0, 0.2);
+    }
+
+    .nextStepBtn {
+        background: #EFAF00;
+        border-radius: 4px;
+        padding: 13px 27px;
+        font-size: 14px;
+        line-height: 16px;
+        font-family: Roboto, serif;
+        font-style: normal;
+        font-weight: normal;
+        color: #FFFFFF;
+    }
+
+    .choiceRadio {
+        color: white;
+    }
+
+    .choiceRadio.active {
+        color: #E7871E;
+    }
+
+    .text2 {
+        font-style: normal;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 113.7%;
+        text-align: center;
+        color: #727272;
+    }
+
+    .text3 {
+        font-family: Roboto, serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        color: #A39B9B;
+    }
+
+    .cakeFountain {
+        width: 10rem;
+        right: 0;
+        bottom: 0;
+    }
+</style>
 <div class="swiper-slide d-flex flex-row align-items-end">
-    <div class="swpSlideContainer w-100">
-        Slide 3
+    <div class="swpSlideContainer" id="swpCookingTypesContainer">
+        <div class="text1 w-50 my-5 px-3">
+            <h2>Souhaitez-vous réserver pour un évènement ou un apprentissage ?</h2>
+        </div>
+        <div class="mx-auto w-75 d-flex">
+            <div class="choiceCard active ml-5 mt-3 px-4 pb-4 pt-3">
+                <div class="text-center">
+                    <i class="fa-regular fa-circle-dot fa-lg choiceRadio active"></i>
+                </div>
+                <div class="text2">
+                    <div class="cardTitle pt-1 pb-3">Pour un évènement</div>
+                </div>
+                <div class="text3">
+                    <p class="cardText">Description évènement Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Porttitor mi ut sed quam velit adipiscing lorem malesuada. Posuere id imperdiet eget dignissim
+                        ac nec. </p>
+                </div>
+            </div>
+            <div class="choiceCard ml-5 mt-3 px-4 pb-4 pt-3">
+                <div class="text-center">
+                    <i class="fa-regular fa-circle-dot fa-lg choiceRadio"></i>
+                </div>
+                <div class="text2">
+                    <div class="cardTitle pt-1 pb-3">Pour un apprentissage</div>
+                </div>
+                <div class="text3">
+                    <p class="cardText">Description apprentissage Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Porttitor mi ut sed quam velit adipiscing lorem malesuada. Posuere id imperdiet eget
+                        dignissim ac nec. </p>
+                </div>
+            </div>
+        </div>
+        <div class="mx-auto w-75 d-flex justify-content-end mt-4">
+            <div class="btn nextStepBtn">Etape suivante</div>
+        </div>
+        <img src="{{ asset('build/images/cake-fountain.png') }}" class="cakeFountain position-absolute" alt="cake-fountain">
     </div>
 </div>

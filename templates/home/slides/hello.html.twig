@@ -1,6 +1,34 @@
+<style>
+    .greetingsTitle {
+        font-family: Sofia Pro, serif;
+        font-style: normal;
+        font-size: 31px;
+        line-height: 113.7%;
+        color: #4E4E4E;
+    }
+
+    .greetingsText {
+        font-family: Roboto, serif;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 19px;
+        color: #A39B9B;
+    }
+</style>
 <div class="swiper-slide d-flex flex-row align-items-end">
     <div class="swpSlideContainer w-100">
-        <div>Slide 1</div>
-        <div class="btnBookChief btn btn-warning">Réserver un chef</div>
+        <div class="row h-100">
+            <div class="col-4 h-100 d-flex flex-column justify-content-start mt-5">
+                <h1 class="greetingsTitle font-weight-bold mb-3 mt-5">Bienvenue chez CheFinder, réserver en ligne votre chef cuisinier</h1>
+                <h2 class="greetingsText font-weight-normal text-justify">
+                    Tu aimerais qu’un chef cuisinier vienne te cuisiner de bons repas à domicile ?
+                    Tu aimerais apprendre de nouvelles recettes ? Ne bouge pas ! Tu es sur le bon site.
+                </h2>
+                <div class="btnBookChief btn mb-2 mt-5">Réserver un chef</div>
+            </div>
+            <div class="col-8 h-100">
+                <img class="vh-100" src="{{ asset('build/images/Cuisto.png') }}" alt="Chef">
+            </div>
+        </div>
     </div>
 </div>
