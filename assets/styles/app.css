@@ -130,3 +130,104 @@ body {
     border-radius: 4px;
     width: fit-content;
 }
+
+/* Form pages */
+
+.formApp {
+    background: linear-gradient(to right, #EFAF00 25%, #E5E5E5 25%, #E5E5E5 25%);
+}
+
+.formApp #navbar {
+    background: none;
+}
+
+.formApp #NavLoginBtn {
+    background: #E7871E !important;
+    border-radius: 4px;
+}
+
+.formApp .nav-item a:hover, .formApp .menuItemDot {
+    color: #7c7c7c !important;
+}
+.formApp .nav-item a {
+    color: #4E4E4E !important;
+}
+
+.formApp #socialIcons {
+    background: none;
+}
+
+.formApp #socialIcons a {
+    color: white;
+}
+
+.formBlock {
+    box-shadow: 0 1px 74px rgba(175, 175, 175, 0.25);
+    border-radius: 4px;
+}
+
+.formBlock .formTitle {
+    font-size: 31px;
+    color: #EFAF00;
+}
+
+.formBlock .formSubTitle {
+    font-family: 'Roboto', serif;
+    color: #A39B9B;
+}
+
+.formBlock .formText {
+    font-family: 'Roboto', serif;
+    color: #A39B9B;
+}
+
+.formBlock .formBtn {
+    color: #EFAF00;
+    text-decoration: underline;
+}
+
+.formBlock label {
+    font-family: 'Roboto', serif;
+    color: #797979;
+}
+
+.formBlock input {
+    background: rgba(239, 175, 0, 0.2);
+    border-radius: 2px;
+    padding: 1.5em;
+    border: none;
+    font-family: 'Roboto', serif;
+    font-size: 14px;
+    color: #797979;
+}
+
+.formBlock input::placeholder {
+    color: #BDB4A7 !important;
+}
+
+.formBlock .input-group-append {
+    margin-left: 0;
+}
+
+.formBlock .input-group-text {
+    background-color: rgba(239, 175, 0, 0.2);
+    border: none;
+    border-radius: 2px;
+}
+
+.formBlock input:focus {
+    background-color: rgba(239, 175, 0, 0.2);
+    box-shadow: 0 0 0 0.2rem rgb(213 133 8 / 37%);
+}
+
+.formBlock .formSubmitBtn {
+    padding: 13px 27px;
+    background: #EFAF00;
+    border-radius: 4px;
+}
+
+.formBlock .formSubmitBtn:focus {
+    box-shadow: none;
+}
+
+

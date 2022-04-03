@@ -17,6 +17,7 @@ let swiper = new Swiper(".mySwiper", {
     direction: "vertical",
     slidesPerView: 1,
     mousewheel: true,
+    allowTouchMove: false,
     pagination: {
         el: ".swiper-pagination",
         clickable: true,
@@ -34,11 +35,12 @@ let socialIconsHeight = $("#socialIcons").outerHeight(true);
 let swpPagination = $(".swiper-pagination").outerWidth(true);
 
 
-$(".swiper-pagination, .swpSlideContainer").css({
+$(".swiper-pagination, .swpSlideContainer, .formContainer").css({
     "height": "calc(100% - " + navbarHeight + "px)",
     "padding-bottom": Math.round(socialIconsHeight) + "px"
 });
 
+$(".formContainer").css({"margin-top": navbarHeight + "px"});
 
 $("#swpCookingTypesContainer").css({
     "width": "calc(94% - " + swpPagination + "px)"
@@ -59,11 +61,38 @@ $(".btnBookChief").click(function () {
 $(".choiceCard").click(function () {
     let activeRadio = $(this).find(".choiceRadio");
     $(".choiceCard, .choiceRadio").removeClass("active");
-    $(this, activeRadio).addClass("active");
+    $(this).addClass("active");
+    $(activeRadio).addClass("active");
 });
 
 swiper.on('slideChange', function () {
     $(".swiper-pagination").fadeTo(200, 1);
+});
+
+
+let pwdInputEyeWidth = $(".pwdInputEye").outerWidth(true);
+
+$(".pwdInput").css({
+    "width": "calc(100% - " + pwdInputEyeWidth + "px)",
+});
+
+$(function () {
+    $('[data-toggle="password"]').each(function () {
+        let input = $(this);
+        let eye_btn = $(this).parent().find('.input-group-text');
+        eye_btn.css('cursor', 'pointer').addClass('input-password-hide');
+        eye_btn.on('click', function () {
+            if (eye_btn.hasClass('input-password-hide')) {
+                eye_btn.removeClass('input-password-hide').addClass('input-password-show');
+                eye_btn.find('.fa').removeClass('fa-eye').addClass('fa-eye-slash')
+                input.attr('type', 'text');
+            } else {
+                eye_btn.removeClass('input-password-show').addClass('input-password-hide');
+                eye_btn.find('.fa').removeClass('fa-eye-slash').addClass('fa-eye')
+                input.attr('type', 'password');
+            }
+        });
+    });
 });
 
 
