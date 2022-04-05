@@ -1,5 +1,81 @@
+<style>
+    .infoBlock, .infoBlockAlt {
+        border-radius: 4px;
+    }
+
+    .infoBlock {
+        background: rgba(239, 175, 0, 0.2);
+    }
+
+    .infoBlockAlt {
+        background: rgba(231, 135, 30, 0.2);
+    }
+    
+    .infoBlockText{
+        font-family: 'Roboto', serif;
+        font-size: 11px;
+        color: #848181;
+    }
+
+    .infoBlockTitle {
+        font-family: 'Sofia Pro', serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 113.7%;
+        color: #4E4E4E;
+    }
+
+    .infoBlock img, .infoBlockAlt img {
+        top: -5%;
+        right: 10%;
+        background: #F7F3EF;
+        box-shadow: 0 1px 33px rgb(239 175 4 / 24%);
+        border-radius: 4px;
+        width: 49px;
+        height: 49px;
+    }
+
+    .womanChiefImg {
+        right: 0;
+        bottom: 0;
+    }
+</style>
 <div class="swiper-slide d-flex flex-row align-items-end">
-    <div class="swpSlideContainer w-100">
-        Slide 2
+    <div class="swpSlideContainer" id="swpPresentationContainer">
+        <div class="pageTitle mt-3 px-3">
+            <h2>Comment réserver votre Chef ?</h2>
+        </div>
+        <div class="d-flex flex-wrap ml-5 mt-5 justify-content-start">
+            <div class="col-5 px-4 p-4 m-2 infoBlock">
+                <div class="w-75 infoBlockTitle mb-3">1. Choix évènement ou apprentissage</div>
+                <p class="w-75 infoBlockText">Que ce soit pour un anniversaire, un repas entre amis ou vous êtes intéressés par prendre des cours de cuisine, nos chefs sont à votre disposition ! </p>
+                <img class="position-absolute p-2" src="{{ asset('build/images/pan-color.svg') }}" alt="Plat">
+            </div>
+            <div class="col-5 px-4 p-4 m-2 infoBlock">
+                <div class="w-75 infoBlockTitle mb-3">4. Trouve ton chef</div>
+                <p class="w-75 infoBlockText">Nous avons sélectionné les meilleurs chefs pour vous ! <br>  Lequel choisis-tu ?</p>
+                <img class="position-absolute p-2" src="{{ asset('build/images/chief-color.svg') }}" alt="Toque">
+            </div>
+            <div class="col-5 px-4 p-4 m-2 infoBlockAlt">
+                <div class="w-75 infoBlockTitle mb-3">2. Choix du type de cuisine</div>
+                <p class="w-75 infoBlockText">Cuisine asiatique, africaine, américaine ? <br>  Rien n’est irréalisable pour nos chefs !</p>
+                <img class="position-absolute p-2" src="{{ asset('build/images/cutlery-color.svg') }}" alt="Couverts">
+            </div>
+            <div class="col-5 px-4 p-4 m-2 infoBlockAlt">
+                <div class="w-75 infoBlockTitle mb-3">5. Page de paiement</div>
+                <p class="w-75 infoBlockText">C’est la dernière étape ! <br>  N’attends plus et accueille ton chef à domicile !</p>
+                <img class="position-absolute p-2" src="{{ asset('build/images/tickets-color.svg') }}" alt="Tickets">
+            </div>
+            <div class="col-5 px-4 p-4 m-2 infoBlock">
+                <div class="infoBlockTitle mb-3">3. Choix recettes avec des box</div>
+                <p class="infoBlockText">Des box recettes ont été construites pour être accessibles à tout le monde. <br> Sélectionne celle qui te convient la mieux ! </p>
+                <img class="position-absolute p-2" src="{{ asset('build/images/meal-color.svg') }}" alt="Box">
+            </div>
+            <div class="col-5 px-0 m-2 d-flex justify-content-end align-items-end">
+                <div class="mainBtn validateBtn btn mb-3" data-slide-to="2">Etape suivante</div>
+            </div>
+            <img class="womanChiefImg position-absolute" src="{{ asset('build/images/chief-woman.svg') }}" alt="Chief-Woman">
+        </div>
     </div>
 </div>

@@ -10,6 +10,11 @@ body {
     background: #F7F3EF;
 }
 
+@keyframes fadeBlock {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
 
 /* Navbar */
 
@@ -118,18 +123,58 @@ body {
     margin-left: 6%;
 }
 
-/* Hello */
-
-.btnBookChief {
-    font-family: Roboto, serif;
+.mainBtn {
+    padding: 13px 27px;
     font-size: 14px;
     line-height: 16px;
-    color: #F7F3EF;
-    padding: 13px 27px;
-    background: #EFAF00;
-    border-radius: 4px;
+    font-family: Roboto, serif;
+    height: fit-content;
     width: fit-content;
 }
+
+.validateBtn {
+    background: #EFAF00;
+    color: #FFF;
+}
+
+.returnBtn {
+    background: #E1D8CD;
+    color: #4E4E4E;
+}
+
+
+/* Overflowed lists */
+
+.overflowedList .listItem {
+    background: rgba(239, 175, 0, 0.1);
+    border-radius: 4px;
+    padding: 10px 11px;
+}
+
+.overflowedList .listItem:hover {
+    cursor: pointer;
+    background: rgba(239, 175, 0, 0.2);
+}
+
+.overflowedList .listItem.active {
+    background: rgb(239 175 0 / 35%);
+    box-shadow: 0 1px 74px rgba(175, 175, 175, 0.25);
+}
+
+.overflowedList .listItem.active .cookingTypeName {color: #4E4E4E;}
+
+.overflowedList::-webkit-scrollbar-thumb {
+    background: #EFAF00 !important;
+    border-radius: 10px !important;
+}
+
+.overflowedList::-webkit-scrollbar {
+    width: 10px !important;
+    background-color: #fff !important;
+    box-shadow: 0 4px 4px rgb(187 187 187 / 25%);
+    border-radius: 10px;
+}
+
 
 /* Form pages */
 

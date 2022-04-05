@@ -1,11 +1,5 @@
 <style>
-    .text1 {
-        font-style: normal;
-        font-weight: 800;
-        font-size: 27px;
-        line-height: 113.7%;
-        color: #4E4E4E;
-    }
+    .pageTitle {color: #4E4E4E;}
 
     .cardTitle {
         font-family: Sofia Pro, serif;
@@ -13,16 +7,6 @@
         font-weight: bold;
         font-size: 18px;
         line-height: 113.7%;
-    }
-
-    .cardText {
-        font-family: Roboto, serif;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 19px;
-        color: #A39B9B;
-        opacity: 0.5;
     }
 
     .choiceCard {
@@ -35,46 +19,21 @@
         background: rgba(239, 175, 0, 0.2);
     }
 
-    .choiceCard.active {
-        background: rgba(239, 175, 0, 0.2);
-    }
+    .choiceCard.active {background: rgba(239, 175, 0, 0.2);}
 
-    .nextStepBtn {
-        background: #EFAF00;
-        border-radius: 4px;
-        padding: 13px 27px;
-        font-size: 14px;
-        line-height: 16px;
+    .choiceRadio {color: white;}
+
+    .choiceCard.active .choiceRadio {color: #E7871E;}
+
+    .choiceCard.active .cardText {opacity: 1;}
+
+    .text2 {color: #727272;}
+
+    .cardText {
         font-family: Roboto, serif;
-        font-style: normal;
-        font-weight: normal;
-        color: #FFFFFF;
-    }
-
-    .choiceRadio {
-        color: white;
-    }
-
-    .choiceRadio.active {
-        color: #E7871E;
-    }
-
-    .text2 {
-        font-style: normal;
-        font-weight: 800;
-        font-size: 18px;
-        line-height: 113.7%;
-        text-align: center;
-        color: #727272;
-    }
-
-    .text3 {
-        font-family: Roboto, serif;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
         line-height: 19px;
         color: #A39B9B;
+        opacity: 0.5;
     }
 
     .cakeFountain {
@@ -82,43 +41,94 @@
         right: 0;
         bottom: 0;
     }
+
+    .cookingTypeName {
+        font-family: 'Roboto', serif;
+        line-height: 19px;
+        color: #BDB4A7;
+    }
+
 </style>
 <div class="swiper-slide d-flex flex-row align-items-end">
     <div class="swpSlideContainer" id="swpCookingTypesContainer">
-        <div class="text1 w-50 my-5 px-3">
-            <h2>Souhaitez-vous réserver pour un évènement ou un apprentissage ?</h2>
-        </div>
-        <div class="mx-auto w-75 d-flex">
-            <div class="choiceCard active ml-5 mt-3 px-4 pb-4 pt-3">
-                <div class="text-center">
-                    <i class="fa-regular fa-circle-dot fa-lg choiceRadio active"></i>
+        <div class="firstStep">
+            <div class="pageTitle w-75 mt-4 mb-5 px-3">
+                <h2>Souhaitez-vous réserver pour un évènement ou un apprentissage ?</h2>
+            </div>
+            <div class="choiceCardsList mx-auto w-75 d-flex">
+                <div class="choiceCard active ml-5 mt-3 px-4 pb-4 pt-3">
+                    <div class="text-center">
+                        <i class="fa-regular fa-circle-dot fa-lg choiceRadio active"></i>
+                    </div>
+                    <div class="text2 text-center">
+                        <div class="cardTitle pt-1 pb-3">Pour un évènement</div>
+                    </div>
+                    <div class="text3">
+                        <p class="cardText active">Pour un mariage, un anniversaire, une soirée d’entreprise... <br> CheFinder vous propose ses services de cuisine à domicile et s’occupe de tout</p>
+                    </div>
                 </div>
-                <div class="text2">
-                    <div class="cardTitle pt-1 pb-3">Pour un évènement</div>
-                </div>
-                <div class="text3">
-                    <p class="cardText">Description évènement Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Porttitor mi ut sed quam velit adipiscing lorem malesuada. Posuere id imperdiet eget dignissim
-                        ac nec. </p>
+                <div class="choiceCard ml-5 mt-3 px-4 pb-4 pt-3">
+                    <div class="text-center">
+                        <i class="fa-regular fa-circle-dot fa-lg choiceRadio"></i>
+                    </div>
+                    <div class="text2 text-center">
+                        <div class="cardTitle pt-1 pb-3">Pour un apprentissage</div>
+                    </div>
+                    <div class="text3">
+                        <p class="cardText">Tu souhaites apprendre à cuisiner ? <br> CheFinder t’offre l’opportunité de suivre un apprentissage en cuisine avec un de nos chefs cuisiniers.</p>
+                    </div>
                 </div>
             </div>
-            <div class="choiceCard ml-5 mt-3 px-4 pb-4 pt-3">
-                <div class="text-center">
-                    <i class="fa-regular fa-circle-dot fa-lg choiceRadio"></i>
+            <div class="mx-auto w-75 d-flex justify-content-end mt-4">
+                <div class="mainBtn validateBtn switchStep btn">Etape suivante</div>
+            </div>
+            <img src="{{ asset('build/images/cake-fountain.png') }}" class="cakeFountain position-absolute" alt="cake-fountain">
+        </div>
+        <div class="secondStep d-none">
+            <div class="pageTitle w-75 mt-3 px-3">
+                <h2>Choisissez le type de cuisine</h2>
+            </div>
+            <div class="d-flex mt-5">
+                <div class="col-4">
+                    <div class="overflowedList h-50 pb-4 d-flex flex-column overflow-auto">
+                        <div class="listItem active d-flex align-items-center p-2 mb-2 mr-2">
+                            <img src="{{ asset('build/images/cooking-world.svg') }}" alt="worldwide-cooking-type">
+                            <div class="cookingTypeName ml-3">Cuisine du monde<br>(asiatique, américaine, etc...)</div>
+                        </div>
+                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2">
+                            <img src="{{ asset('build/images/cooking-world.svg') }}" alt="worldwide-cooking-type">
+                            <div class="cookingTypeName ml-3">Cuisine healthy</div>
+                        </div>
+                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2">
+                            <img src="{{ asset('build/images/cooking-world.svg') }}" alt="worldwide-cooking-type">
+                            <div class="cookingTypeName ml-3">Street food<br>(burgers, pizzas, sandwich, etc...)</div>
+                        </div>
+                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2">
+                            <img src="{{ asset('build/images/cooking-world.svg') }}" alt="worldwide-cooking-type">
+                            <div class="cookingTypeName ml-3">Cuisine française</div>
+                        </div>
+                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2">
+                            <img src="{{ asset('build/images/cooking-world.svg') }}" alt="worldwide-cooking-type">
+                            <div class="cookingTypeName ml-3">Cuisine végétarienne</div>
+                        </div>
+                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2">
+                            <img src="{{ asset('build/images/cooking-world.svg') }}" alt="worldwide-cooking-type">
+                            <div class="cookingTypeName ml-3">Cuisine vegan</div>
+                        </div>
+                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2">
+                            <img src="{{ asset('build/images/cooking-world.svg') }}" alt="worldwide-cooking-type">
+                            <div class="cookingTypeName ml-3">Cuisine moléculaire</div>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-2">
+                        <div class="w-25 mr-2 mainBtn returnBtn switchStep btn">Retour</div>
+                        <div class="w-75 ml-2 mainBtn validateBtn btn" data-slide-to="3">Valider son type de cuisine</div>
+                    </div>
                 </div>
-                <div class="text2">
-                    <div class="cardTitle pt-1 pb-3">Pour un apprentissage</div>
-                </div>
-                <div class="text3">
-                    <p class="cardText">Description apprentissage Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Porttitor mi ut sed quam velit adipiscing lorem malesuada. Posuere id imperdiet eget
-                        dignissim ac nec. </p>
+                <div class="col-8 pr-0 d-flex justify-content-center">
+                    <img src="{{ asset('build/images/chief-woman-working.svg') }}" class="position-absolute" alt="chief-woman-working">
                 </div>
             </div>
         </div>
-        <div class="mx-auto w-75 d-flex justify-content-end mt-4">
-            <div class="btn nextStepBtn">Etape suivante</div>
-        </div>
-        <img src="{{ asset('build/images/cake-fountain.png') }}" class="cakeFountain position-absolute" alt="cake-fountain">
     </div>
 </div>
