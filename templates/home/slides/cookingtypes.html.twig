@@ -1,5 +1,5 @@
 <style>
-    .pageTitle {color: #4E4E4E;}
+    .pageTitle {color: #4E4E4E}
 
     .cardTitle {
         font-family: Sofia Pro, serif;
@@ -19,15 +19,15 @@
         background: rgba(239, 175, 0, 0.2);
     }
 
-    .choiceCard.active {background: rgba(239, 175, 0, 0.2);}
+    .choiceCard.active {background: rgb(239 175 0 / 25%)}
 
-    .choiceRadio {color: white;}
+    .choiceRadio {color: white}
 
-    .choiceCard.active .choiceRadio {color: #E7871E;}
+    .choiceCard.active .choiceRadio {color: #E7871E}
 
-    .choiceCard.active .cardText {opacity: 1;}
+    .choiceCard.active .cardText {opacity: 1}
 
-    .text2 {color: #727272;}
+    .text2 {color: #727272}
 
     .cardText {
         font-family: Roboto, serif;
@@ -82,7 +82,7 @@
             <div class="mx-auto w-75 d-flex justify-content-end mt-4">
                 <div class="mainBtn validateBtn switchStep btn">Etape suivante</div>
             </div>
-            <img src="{{ asset('build/images/cake-fountain.png') }}" class="cakeFountain position-absolute" alt="cake-fountain">
+            <img src="{{ asset('build/images/slides/cake-fountain.png') }}" class="cakeFountain position-absolute" alt="cake-fountain">
         </div>
         <div class="secondStep d-none">
             <div class="pageTitle w-75 mt-3 px-3">
@@ -90,34 +90,34 @@
             </div>
             <div class="d-flex mt-5">
                 <div class="col-4">
-                    <div class="overflowedList h-50 pb-4 d-flex flex-column overflow-auto">
-                        <div class="listItem active d-flex align-items-center p-2 mb-2 mr-2">
-                            <img src="{{ asset('build/images/cooking-world.svg') }}" alt="worldwide-cooking-type">
+                    <div class="overflowedList mealTypeList h-50 pb-4 d-flex flex-column overflow-auto">
+                        <div class="listItem active d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="monde">
+                            <img src="{{ asset('build/images/cooking-types/world.svg') }}" alt="worldwide-cooking-type">
                             <div class="cookingTypeName ml-3">Cuisine du monde<br>(asiatique, américaine, etc...)</div>
                         </div>
-                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2">
-                            <img src="{{ asset('build/images/cooking-world.svg') }}" alt="worldwide-cooking-type">
+                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="healthy">
+                            <img src="{{ asset('build/images/cooking-types/healthy.svg') }}" alt="worldwide-cooking-type">
                             <div class="cookingTypeName ml-3">Cuisine healthy</div>
                         </div>
-                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2">
-                            <img src="{{ asset('build/images/cooking-world.svg') }}" alt="worldwide-cooking-type">
+                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="street-food">
+                            <img src="{{ asset('build/images/cooking-types/street-food.svg') }}" alt="worldwide-cooking-type">
                             <div class="cookingTypeName ml-3">Street food<br>(burgers, pizzas, sandwich, etc...)</div>
                         </div>
-                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2">
-                            <img src="{{ asset('build/images/cooking-world.svg') }}" alt="worldwide-cooking-type">
+                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="française">
+                            <img src="{{ asset('build/images/cooking-types/french.svg') }}" alt="worldwide-cooking-type">
                             <div class="cookingTypeName ml-3">Cuisine française</div>
                         </div>
-                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2">
-                            <img src="{{ asset('build/images/cooking-world.svg') }}" alt="worldwide-cooking-type">
+                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="végé">
+                            <img src="{{ asset('build/images/cooking-types/vegetarian.png') }}" alt="worldwide-cooking-type">
                             <div class="cookingTypeName ml-3">Cuisine végétarienne</div>
                         </div>
-                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2">
-                            <img src="{{ asset('build/images/cooking-world.svg') }}" alt="worldwide-cooking-type">
+                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="vegan">
+                            <img src="{{ asset('build/images/cooking-types/vegan.png') }}" alt="worldwide-cooking-type">
                             <div class="cookingTypeName ml-3">Cuisine vegan</div>
                         </div>
-                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2">
-                            <img src="{{ asset('build/images/cooking-world.svg') }}" alt="worldwide-cooking-type">
-                            <div class="cookingTypeName ml-3">Cuisine moléculaire</div>
+                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="gastronomique">
+                            <img src="{{ asset('build/images/cooking-types/gastronomic.png') }}" alt="worldwide-cooking-type">
+                            <div class="cookingTypeName ml-3">Cuisine gastronomique</div>
                         </div>
                     </div>
                     <div class="d-flex mt-2">
@@ -126,7 +126,7 @@
                     </div>
                 </div>
                 <div class="col-8 pr-0 d-flex justify-content-center">
-                    <img src="{{ asset('build/images/chief-woman-working.svg') }}" class="position-absolute" alt="chief-woman-working">
+                    <img src="{{ asset('build/images/slides/chief-woman-working.svg') }}" class="position-absolute" alt="chief-woman-working">
                 </div>
             </div>
         </div>

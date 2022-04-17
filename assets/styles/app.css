@@ -175,6 +175,11 @@ body {
     border-radius: 10px;
 }
 
+.overflowedList img {
+    width: 59px;
+    height: 59px;
+}
+
 
 /* Form pages */
 

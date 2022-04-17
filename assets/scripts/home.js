@@ -11,7 +11,6 @@ let icons = [
     ["tickets", "Mode de paiement"],
     ["tick", "Confirmation"],
 ];
-let socialIcons = ["facebook", "instagram", "linkedin", "youtube"];
 
 
 // Declare the slider component with options and generate the slide buttons based on the icons array
@@ -25,7 +24,7 @@ let swiper = new Swiper(".mySwiper", {
         clickable: true,
         renderBullet: function (index, className) {
             return '<div class="mx-auto ' + className + '">' +
-                '<div class="sidebarIcon" title="' + icons[index][1] + '" style="-webkit-mask: url(./build/images/' + icons[index][0] + '.svg) no-repeat center / contain; mask: url(./build/images/' + icons[index][0] + '.svg) no-repeat center / contain;"></div>' +
+                '<div class="sidebarIcon" title="' + icons[index][1] + '" style="-webkit-mask: url(./build/images/layout/sidebar/' + icons[index][0] + '.svg) no-repeat center / contain; mask: url(./build/images/layout/sidebar/' + icons[index][0] + '.svg) no-repeat center / contain;"></div>' +
                 '</div>';
         },
     },
@@ -38,14 +37,14 @@ let socialIconsHeight = $("#socialIcons").outerHeight(true);
 let swpPagination = $(".swiper-pagination").outerWidth(true);
 
 
-$(".swiper-pagination, .swpSlideContainer, .formContainer").css({
+$(".swiper-pagination, .swpSlideContainer, .formContainer, .boxOrder").css({
     "height": "calc(100% - " + navbarHeight + "px)",
     "padding-bottom": Math.round(socialIconsHeight) + "px"
 });
 
 $(".formContainer").css({"margin-top": navbarHeight + "px"});
 
-$("#swpCookingTypesContainer, #swpPresentationContainer").css({
+$("#swpCookingTypesContainer, #swpPresentationContainer, .boxOrderDetailsContainer").css({
     "width": "calc(94% - " + swpPagination + "px)"
 });
 
@@ -85,6 +84,22 @@ $(".listItem").click(function () {
 });
 
 
+// Hide and show meal details based on the click of items in the list
+$(".boxList .listItem").click(function () {
+    let box = $(this).data("box");
+    $(this).closest('.swpSlideContainer').find('.boxOrderItem').addClass("d-none");
+    $(this).closest('.swpSlideContainer').find('.boxOrderItem[data-recette-order="' + box + '"]').removeClass("d-none").css({"animation" : 'fadeBlock 250ms ease-in-out both'});
+});
+
+
+// Filter the boxes based on the selected meal types
+$(".mealTypeList .listItem").click(function () {
+    let mealType = $(this).data("meal-type");
+    $(this).closest('.swiper-wrapper').find('.boxList .listItem').addClass("d-none").removeClass("d-flex");
+    $(this).closest('.swiper-wrapper').find('.boxList .listItem[data-meal-type="' + mealType + '"]').addClass("d-flex").removeClass("d-none").css({"animation" : 'fadeBlock 250ms ease-in-out both'});
+});
+
+
 // Add a fade animation on slide change
 swiper.on('slideChange', function () {
     $(".swiper-pagination").fadeTo(200, 1);
@@ -100,6 +115,27 @@ $(overflowList).mouseenter(function () {
 // Revert to the default slider scroll behaviour when the user cursor leave the list
 $(overflowList).mouseleave(function () {
     swiper.mousewheel.enable()
+});
+
+
+// Manage the dynamic box order numbers (price, quantity, total)
+$(".choiceCard .orderIncrementBtn").click(function () {
+    let incrType = $(this).data("incr-type");
+    let quantityTxt = $(this).closest('.choiceCard.active').find('.orderQuantity');
+    let priceTxt = $(this).closest('.choiceCard.active').find('.orderPrice');
+    let ordRecapQuant = $(this).closest('.boxOrderDetailsContainer').find('.ordRecapQuantity');
+    let ordRecapPrice = $(this).closest('.boxOrderDetailsContainer').find('.ordRecapPrice');
+    let ordPriceTotal = $(this).closest('.boxOrderDetailsContainer').find('.orderPriceTotal');
+    let quantity = parseInt(quantityTxt.text());
+    if (incrType === "+" && quantity < 10) {
+        quantityTxt.text(quantity + 1);
+    } else if (incrType === "-" && quantity > 1) {
+        quantityTxt.text(quantity - 1);
+    }
+    ordRecapQuant.text(quantityTxt.text());
+    ordRecapPrice.text(priceTxt.text());
+    ordPriceTotal.text(quantityTxt.text() * priceTxt.text());
+
 });
 
 

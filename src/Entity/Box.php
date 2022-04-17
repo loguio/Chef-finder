@@ -22,37 +22,31 @@ class Box
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $price;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=FoodCategory::class, inversedBy="boxes")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $foodCategory;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="boxes")
-     */
-    private $products;
+    private ?float $price;
 
     /**
      * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="box", orphanRemoval=true)
      */
-    private $bookings;
+    private ArrayCollection $bookings;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Meal::class, inversedBy="boxes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private ?Meal $meal;
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
         $this->bookings = new ArrayCollection();
     }
 
@@ -97,42 +91,6 @@ class Box
         return $this;
     }
 
-    public function getFoodCategory(): ?FoodCategory
-    {
-        return $this->foodCategory;
-    }
-
-    public function setFoodCategory(?FoodCategory $foodCategory): self
-    {
-        $this->foodCategory = $foodCategory;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Product[]
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): self
-    {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): self
-    {
-        $this->products->removeElement($product);
-
-        return $this;
-    }
-
     /**
      * @return Collection|Booking[]
      */
@@ -159,6 +117,18 @@ class Box
                 $booking->setBox(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMeal(): ?Meal
+    {
+        return $this->meal;
+    }
+
+    public function setMeal(?Meal $meal): self
+    {
+        $this->meal = $meal;
 
         return $this;
     }

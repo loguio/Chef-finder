@@ -22,42 +22,62 @@ class UserChief
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $firstName;
+    private ?string $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $lastName;
+    private ?string $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    private ?string $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $password;
+    private ?string $password;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $phoneNumber;
+    private ?string $phoneNumber;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $company;
+    private ?string $company;
 
     /**
      * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="chief", orphanRemoval=true)
      */
-    private $bookings;
+    private ArrayCollection $bookings;
 
     /**
      * @ORM\OneToMany(targetEntity=Live::class, mappedBy="userChief", orphanRemoval=true)
      */
-    private $lives;
+    private ArrayCollection $lives;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private ?string $slogan;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private array $equipments = [];
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $picture;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private ?string $description;
 
     public function __construct()
     {
@@ -198,6 +218,54 @@ class UserChief
                 $live->setUserChief(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlogan(): ?string
+    {
+        return $this->slogan;
+    }
+
+    public function setSlogan(string $slogan): self
+    {
+        $this->slogan = $slogan;
+
+        return $this;
+    }
+
+    public function getEquipments(): ?array
+    {
+        return $this->equipments;
+    }
+
+    public function setEquipments(array $equipments): self
+    {
+        $this->equipments = $equipments;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

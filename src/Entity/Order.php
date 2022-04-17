@@ -21,18 +21,18 @@ class Order
     /**
      * @ORM\Column(type="float")
      */
-    private $price;
+    private ?float $price;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $status;
+    private ?string $status;
 
     /**
      * @ORM\OneToOne(targetEntity=Booking::class, inversedBy="linkedOrder", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $booking;
+    private ?Booking $booking;
 
     public function getId(): ?int
     {

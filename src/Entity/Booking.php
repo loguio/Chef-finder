@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\BookingRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,90 +19,61 @@ class Booking
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $date;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $type;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $status;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $streetNumber;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $street;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $city;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $postCode;
+    private ?string $status;
 
     /**
      * @ORM\ManyToOne(targetEntity=Box::class, inversedBy="bookings")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $box;
+    private ?Box $box;
 
     /**
      * @ORM\OneToOne(targetEntity=Order::class, mappedBy="booking", cascade={"persist", "remove"})
      */
-    private $linkedOrder;
+    private ?Order $linkedOrder;
 
     /**
      * @ORM\ManyToOne(targetEntity=UserChief::class, inversedBy="bookings")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $chief;
+    private ?UserChief $chief;
 
     /**
      * @ORM\ManyToOne(targetEntity=UserCustomer::class, inversedBy="bookings")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $customer;
+    private ?userCustomer $customer;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private ?int $box_quantity;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private ?DateTimeInterface $date;
+
+    /**
+     * @ORM\Column(type="time")
+     */
+    private ?DateTimeInterface $time;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private ?string $delivery_address;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private ?string $appointment_address;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
     }
 
     public function getStatus(): ?string
@@ -112,54 +84,6 @@ class Booking
     public function setStatus(string $status): self
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    public function getStreetNumber(): ?string
-    {
-        return $this->streetNumber;
-    }
-
-    public function setStreetNumber(string $streetNumber): self
-    {
-        $this->streetNumber = $streetNumber;
-
-        return $this;
-    }
-
-    public function getStreet(): ?string
-    {
-        return $this->street;
-    }
-
-    public function setStreet(string $street): self
-    {
-        $this->street = $street;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getPostCode(): ?string
-    {
-        return $this->postCode;
-    }
-
-    public function setPostCode(string $postCode): self
-    {
-        $this->postCode = $postCode;
 
         return $this;
     }
@@ -213,6 +137,66 @@ class Booking
     public function setCustomer(?userCustomer $Customer): self
     {
         $this->Customer = $Customer;
+
+        return $this;
+    }
+
+    public function getBoxQuantity(): ?int
+    {
+        return $this->box_quantity;
+    }
+
+    public function setBoxQuantity(int $box_quantity): self
+    {
+        $this->box_quantity = $box_quantity;
+
+        return $this;
+    }
+
+    public function getDate(): ?DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getTime(): ?DateTimeInterface
+    {
+        return $this->time;
+    }
+
+    public function setTime(DateTimeInterface $time): self
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
+    public function getDeliveryAddress(): ?string
+    {
+        return $this->delivery_address;
+    }
+
+    public function setDeliveryAddress(string $delivery_address): self
+    {
+        $this->delivery_address = $delivery_address;
+
+        return $this;
+    }
+
+    public function getAppointmentAddress(): ?string
+    {
+        return $this->appointment_address;
+    }
+
+    public function setAppointmentAddress(string $appointment_address): self
+    {
+        $this->appointment_address = $appointment_address;
 
         return $this;
     }

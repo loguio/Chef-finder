@@ -22,21 +22,26 @@ class FoodCategory
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private ?string $name;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $description;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $description;
+    private ?string $picture;
 
     /**
-     * @ORM\OneToMany(targetEntity=Box::class, mappedBy="foodCategory", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Meal::class, mappedBy="food_category_id", orphanRemoval=true)
      */
-    private $boxes;
+    private $meals;
 
     public function __construct()
     {
-        $this->boxes = new ArrayCollection();
+        $this->meals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -68,30 +73,42 @@ class FoodCategory
         return $this;
     }
 
-    /**
-     * @return Collection|Box[]
-     */
-    public function getBoxes(): Collection
+    public function getPicture(): ?string
     {
-        return $this->boxes;
+        return $this->picture;
     }
 
-    public function addBox(Box $box): self
+    public function setPicture(string $picture): self
     {
-        if (!$this->boxes->contains($box)) {
-            $this->boxes[] = $box;
-            $box->setFoodCategory($this);
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Meal[]
+     */
+    public function getMeals(): Collection
+    {
+        return $this->meals;
+    }
+
+    public function addMeal(Meal $meal): self
+    {
+        if (!$this->meals->contains($meal)) {
+            $this->meals[] = $meal;
+            $meal->setFoodCategoryId($this);
         }
 
         return $this;
     }
 
-    public function removeBox(Box $box): self
+    public function removeMeal(Meal $meal): self
     {
-        if ($this->boxes->removeElement($box)) {
+        if ($this->meals->removeElement($meal)) {
             // set the owning side to null (unless already changed)
-            if ($box->getFoodCategory() === $this) {
-                $box->setFoodCategory(null);
+            if ($meal->getFoodCategoryId() === $this) {
+                $meal->setFoodCategoryId(null);
             }
         }
 
