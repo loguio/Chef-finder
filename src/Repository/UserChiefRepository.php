@@ -19,32 +19,12 @@ class UserChiefRepository extends ServiceEntityRepository
         parent::__construct($registry, UserChief::class);
     }
 
-    // /**
-    //  * @return UserChief[] Returns an array of UserChief objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findAllOrderedBy($orderKey): array
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.' . $orderKey, 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?UserChief
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -17,7 +17,7 @@ class Meal
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -37,13 +37,13 @@ class Meal
     /**
      * @ORM\OneToMany(targetEntity=Box::class, mappedBy="meal_id", orphanRemoval=true)
      */
-    private ArrayCollection $boxes;
+    private Collection $boxes;
 
     /**
      * @ORM\ManyToOne(targetEntity=FoodCategory::class, inversedBy="meals")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $food_category;
+    private ?FoodCategory $food_category;
 
     public function __construct()
     {
@@ -103,7 +103,7 @@ class Meal
     {
         if (!$this->boxes->contains($box)) {
             $this->boxes[] = $box;
-            $box->setMealId($this);
+            $box->setMeal($this);
         }
 
         return $this;

@@ -17,7 +17,7 @@ class Box
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -37,13 +37,13 @@ class Box
     /**
      * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="box", orphanRemoval=true)
      */
-    private ArrayCollection $bookings;
+    private Collection $bookings;
 
     /**
      * @ORM\ManyToOne(targetEntity=Meal::class, inversedBy="boxes")
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?Meal $meal;
+    public ?Meal $meal;
 
     public function __construct()
     {

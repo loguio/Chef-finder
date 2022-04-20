@@ -44,7 +44,7 @@ $(".swiper-pagination, .swpSlideContainer, .formContainer, .boxOrder").css({
 
 $(".formContainer").css({"margin-top": navbarHeight + "px"});
 
-$("#swpCookingTypesContainer, #swpPresentationContainer, .boxOrderDetailsContainer").css({
+$("#swpCookingTypesContainer, #swpPresentationContainer, .boxOrderDetailsContainer, #swpChiefsContainer").css({
     "width": "calc(94% - " + swpPagination + "px)"
 });
 
@@ -92,11 +92,19 @@ $(".boxList .listItem").click(function () {
 });
 
 
-// Filter the boxes based on the selected meal types
+// Filter the boxes based on the selected cooking types
 $(".mealTypeList .listItem").click(function () {
     let mealType = $(this).data("meal-type");
-    $(this).closest('.swiper-wrapper').find('.boxList .listItem').addClass("d-none").removeClass("d-flex");
-    $(this).closest('.swiper-wrapper').find('.boxList .listItem[data-meal-type="' + mealType + '"]').addClass("d-flex").removeClass("d-none").css({"animation" : 'fadeBlock 250ms ease-in-out both'});
+    let swpWrapper = $(this).closest('.swiper-wrapper');
+    let mealsList = swpWrapper.find('.boxList .listItem');
+    let cookingTypeMeals = swpWrapper.find('.boxList .listItem[data-meal-type="' + mealType + '"]');
+    mealsList.addClass("d-none").removeClass("d-flex");
+    cookingTypeMeals.addClass("d-flex").removeClass("d-none").css({"animation" : 'fadeBlock 250ms ease-in-out both'});
+    mealsList.removeClass("active");
+    cookingTypeMeals.not('.d-none').first().addClass("active");
+    swpWrapper.find('.boxOrderItem').addClass("d-none");
+    let activeMeal = swpWrapper.find('.boxList .listItem.active').data("box");
+    swpWrapper.find('.boxOrderItem[data-recette-order="' + activeMeal + '"]').removeClass("d-none");
 });
 
 
@@ -165,5 +173,8 @@ $(function () {
     });
 });
 
+
+// Debug to work en slides and auto scroll to the desired one
+swiper.slideTo(4, 350);
 
 

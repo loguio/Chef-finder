@@ -19,32 +19,12 @@ class FoodCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, FoodCategory::class);
     }
 
-    // /**
-    //  * @return FoodCategory[] Returns an array of FoodCategory objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findAllOrderedBy($orderKey): array
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('fc')
+            ->orderBy('fc.' . $orderKey, 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?FoodCategory
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

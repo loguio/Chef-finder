@@ -19,32 +19,12 @@ class BoxRepository extends ServiceEntityRepository
         parent::__construct($registry, Box::class);
     }
 
-    // /**
-    //  * @return Box[] Returns an array of Box objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findAllOrderedBy($orderKey): array
     {
         return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('b.' . $orderKey, 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Box
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

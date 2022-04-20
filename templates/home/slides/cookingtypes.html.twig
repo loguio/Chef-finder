@@ -91,34 +91,12 @@
             <div class="d-flex mt-5">
                 <div class="col-4">
                     <div class="overflowedList mealTypeList h-50 pb-4 d-flex flex-column overflow-auto">
-                        <div class="listItem active d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="monde">
-                            <img src="{{ asset('build/images/cooking-types/world.svg') }}" alt="worldwide-cooking-type">
-                            <div class="cookingTypeName ml-3">Cuisine du monde<br>(asiatique, américaine, etc...)</div>
-                        </div>
-                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="healthy">
-                            <img src="{{ asset('build/images/cooking-types/healthy.svg') }}" alt="worldwide-cooking-type">
-                            <div class="cookingTypeName ml-3">Cuisine healthy</div>
-                        </div>
-                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="street-food">
-                            <img src="{{ asset('build/images/cooking-types/street-food.svg') }}" alt="worldwide-cooking-type">
-                            <div class="cookingTypeName ml-3">Street food<br>(burgers, pizzas, sandwich, etc...)</div>
-                        </div>
-                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="française">
-                            <img src="{{ asset('build/images/cooking-types/french.svg') }}" alt="worldwide-cooking-type">
-                            <div class="cookingTypeName ml-3">Cuisine française</div>
-                        </div>
-                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="végé">
-                            <img src="{{ asset('build/images/cooking-types/vegetarian.png') }}" alt="worldwide-cooking-type">
-                            <div class="cookingTypeName ml-3">Cuisine végétarienne</div>
-                        </div>
-                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="vegan">
-                            <img src="{{ asset('build/images/cooking-types/vegan.png') }}" alt="worldwide-cooking-type">
-                            <div class="cookingTypeName ml-3">Cuisine vegan</div>
-                        </div>
-                        <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="gastronomique">
-                            <img src="{{ asset('build/images/cooking-types/gastronomic.png') }}" alt="worldwide-cooking-type">
-                            <div class="cookingTypeName ml-3">Cuisine gastronomique</div>
-                        </div>
+                        {% for food_category in food_categories %}
+                            <div class="listItem d-flex align-items-center p-2 mb-2 mr-2 {{ loop.first ? 'active' }}" data-meal-type="{{ food_category.id }}">
+                                <img src="{{ asset('build/images/cooking-types/' ~ food_category.picture ) }}" alt="{{ food_category.name }}">
+                                <div class="cookingTypeName ml-3">{{ food_category.name }}{% if food_category.description %}<br>{{ food_category.description }}{% endif %}</div>
+                            </div>
+                        {% endfor %}
                     </div>
                     <div class="d-flex mt-2">
                         <div class="w-25 mr-2 mainBtn returnBtn switchStep btn">Retour</div>

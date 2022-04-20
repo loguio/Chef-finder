@@ -9,6 +9,8 @@
         width: 79px;
         height: 79px;
         top: -4%;
+        border-radius: 14px;
+        background-color: #fff8ef;
     }
     
     .boxOrderDetails {
@@ -40,180 +42,77 @@
         <div class="d-flex mt-5">
             <div class="col-4">
                 <div class="overflowedList boxList h-50 pb-4 d-flex flex-column overflow-auto">
-                    <div class="listItem active d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="monde" data-box="wok-crevettes-thai">
-                        <img src="{{ asset('build/images/meals/wok.svg') }}" alt="wok">
-                        <div class="cookingTypeName ml-3">Wok de crevettes thaï</div>
-                    </div>
-                    <div class="listItem align-items-center p-2 mb-2 mr-2 d-none" data-meal-type="healthy" data-box="gyozas-&-raviolis">
-                        <img src="{{ asset('build/images/meals/gyozas-&-raviolis.svg') }}" alt="gyozas-&-raviolis">
-                        <div class="cookingTypeName ml-3">Gyozas & Raviolis</div>
-                    </div>
-                    <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="monde" data-box="wok-crevettes-thai">
-                        <img src="{{ asset('build/images/meals/wok.svg') }}" alt="wok">
-                        <div class="cookingTypeName ml-3">Nouilles chinoises</div>
-                    </div>
-                    <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="monde" data-box="wok-crevettes-thai">
-                        <img src="{{ asset('build/images/meals/wok.svg') }}" alt="wok">
-                        <div class="cookingTypeName ml-3">Poulet tikka masala</div>
-                    </div>
-                    <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="monde" data-box="wok-crevettes-thai">
-                        <img src="{{ asset('build/images/meals/wok.svg') }}" alt="wok">
-                        <div class="cookingTypeName ml-3">Poulet tikka masala</div>
-                    </div>
-                    <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="monde" data-box="wok-crevettes-thai">
-                        <img src="{{ asset('build/images/meals/wok.svg') }}" alt="wok">
-                        <div class="cookingTypeName ml-3">Poulet tikka masala</div>
-                    </div>
-                    <div class="listItem d-flex align-items-center p-2 mb-2 mr-2" data-meal-type="monde" data-box="wok-crevettes-thai">
-                        <img src="{{ asset('build/images/meals/wok.svg') }}" alt="wok">
-                        <div class="cookingTypeName ml-3">Poulet tikka masala</div>
-                    </div>
+                    {% for meal in meals %}
+                        <div class="listItem align-items-center p-2 mb-2 mr-2 {{ meal.foodCategory.id == '1' ? 'd-flex' : 'd-none' }} {{ loop.first ? 'active' }}" data-meal-type="{{ meal.foodCategory.id }}" data-box="{{ meal.name }}">
+                            <img src="{{ asset('build/images/meals/' ~ meal.picture ) }}" alt="{{ meal.name }}">
+                            <div class="cookingTypeName ml-3">{{ meal.name }}</div>
+                        </div>
+                    {% endfor %}
                 </div>
                 <div class="mt-2 w-100 mainBtn returnBtn btn" data-slide-to="2">Retour au choix du type de recette</div>
             </div>
             <div class="col-8 pr-0 boxOrder">
-                <div class="boxOrderItem" data-recette-order="wok-crevettes-thai">
-                    <div class="boxOrderDetailsContainer d-flex justify-content-between bg-white p-4 mb-3" style="border-radius: 4px">
-                        <div class="d-flex align-items-center">
-                            <div style="width: 79px">
-                                <img class="boxDetailsImg position-absolute" src="{{ asset('build/images/meals/wok.svg') }}" alt="meal-wok">
+                {% for meal in meals %}
+                    <div class="boxOrderItem {% if not loop.first %}d-none{% endif %}" data-recette-order="{{ meal.name }}">
+                        <div class="boxOrderDetailsContainer d-flex justify-content-between bg-white p-4 mb-3" style="border-radius: 4px">
+                            <div class="d-flex align-items-center">
+                                <div style="width: 79px">
+                                    <img class="boxDetailsImg position-absolute" src="{{ asset('build/images/meals/' ~ meal.picture ) }}" alt="{{ meal.name }}">
+                                </div>
+                                <div class="boxDetailsName ml-3">{{ meal.name }}</div>
                             </div>
-                            <div class="boxDetailsName ml-3">Wok de crevettes thaï</div>
+                            <i class="fa-solid fa-chevron-down mt-2" style="color: #EFAF00"></i>
                         </div>
-                        <i class="fa-solid fa-chevron-down mt-2" style="color: #EFAF00"></i>
-                    </div>
-                    <div class="boxOrderDetailsContainer bg-white px-4 py-3" style="border-radius: 4px">
-                        <div class="choiceCardsList d-flex">
-                            <div class="w-50 mr-2">
-                                <div class="boxOrderTitle mb-1">Box Basic</div>
-                                <div class="choiceCard active px-4 pb-4 pt-3">
-                                    <div class="text-center mb-2">
-                                        <i class="fa-regular fa-circle-dot fa-lg choiceRadio"></i>
-                                    </div>
-                                    <p class="text-center cardText mx-3">La box est composée d’ingredients frais et savoureux pour les petits budgets.</p>
-                                    <div class="boxOrderDetails text-center"><u>En savoir plus</u></div>
-                                    <div class="mt-4 d-flex justify-content-center orderPrices">
-                                        <div class="d-flex">
-                                            <div class="orderIncrementBtn text-white p-2" data-incr-type="-" style="background: #E7871E">-</div>
-                                            <div class="orderQuantity bg-white p-2" style="color: #E7871E">1</div>
-                                            <div class="orderIncrementBtn text-white p-2" data-incr-type="+" style="background: #E7871E">+</div>
+                        <div class="boxOrderDetailsContainer bg-white px-4 py-3" style="border-radius: 4px">
+                            {% for meal_box in meal.meal_boxes %}
+                                {% if loop.first %}
+                                    <div class="choiceCardsList d-flex">
+                                {% endif %}
+                                <div class="w-50 {{ loop.first ? 'mr-2' : 'ml-2' }}">
+                                    <div class="boxOrderTitle mb-1">{{ meal_box.name }}</div>
+                                    <div class="choiceCard px-4 pb-4 pt-3 {{ loop.first ? 'active' }}">
+                                        <div class="text-center mb-2">
+                                            <i class="fa-regular fa-circle-dot fa-lg choiceRadio"></i>
                                         </div>
-                                        <div class="d-flex bg-white py-2 px-3 ml-2 font-weight-bold" style="color: #E7871E">
-                                            <div class="orderPrice">15</div>€
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-50 ml-2">
-                                <div class="boxOrderTitle mb-1">Box Premium</div>
-                                <div class="choiceCard px-4 pb-4 pt-3">
-                                    <div class="text-center mb-2">
-                                        <i class="fa-regular fa-circle-dot fa-lg choiceRadio"></i>
-                                    </div>
-                                    <p class="text-center cardText mx-3">La box favorise des ingredients Bio et des produits locaux. Tu pourras retrouver des surprises dans ta box !</p>
-                                    <div class="boxOrderDetails text-center"><u>En savoir plus</u></div>
-                                    <div class="mt-4 d-flex justify-content-center orderPrices">
-                                        <div class="d-flex">
-                                            <div class="orderIncrementBtn text-white p-2" data-incr-type="-" style="background: #E7871E">-</div>
-                                            <div class="orderQuantity bg-white p-2" style="color: #E7871E">1</div>
-                                            <div class="orderIncrementBtn text-white p-2" data-incr-type="+" style="background: #E7871E">+</div>
-                                        </div>
-                                        <div class="d-flex bg-white py-2 px-3 ml-2 font-weight-bold" style="color: #E7871E">
-                                            <div class="orderPrice">35</div>€
+                                        <p class="text-center cardText mx-3">{{ meal_box.description }}</p>
+                                        <div class="boxOrderDetails text-center"><u>En savoir plus</u></div>
+                                        <div class="mt-4 d-flex justify-content-center orderPrices">
+                                            <div class="d-flex">
+                                                <div class="orderIncrementBtn text-white p-2" data-incr-type="-" style="background: #E7871E">-</div>
+                                                <div class="orderQuantity bg-white p-2" style="color: #E7871E">1</div>
+                                                <div class="orderIncrementBtn text-white p-2" data-incr-type="+" style="background: #E7871E">+</div>
+                                            </div>
+                                            <div class="d-flex bg-white py-2 px-3 ml-2 font-weight-bold" style="color: #E7871E">
+                                                <div class="orderPrice">{{ meal_box.price }}</div>€
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <hr class="w-100">
-                        <div class="boxOrderDetails d-flex">
-                            <div class="w-50">
-                                <div class="d-flex justify-content-between">
-                                    <div>Récapitulatif :</div>
-                                    <div class="d-flex"><div class="ordRecapQuantity">1</div>&nbsp;x&nbsp;<div class="ordRecapPrice">15</div>€</div>
-                                </div>
-                                <div class="d-flex justify-content-between mt-1">
-                                    <div><u>Total de la commande :</u></div>
-                                    <div class="d-flex"><div class="orderPriceTotal">15</div>€</div>
-                                </div>
-                            </div>
-                            <div class="w-50 d-flex justify-content-end">
-                                <div class="mainBtn validateBtn btn">Ajouter au panier</div>
-                            </div>
+                                {% if loop.last %}
+                                    </div>
+                                    <hr class="w-100">
+                                    <div class="boxOrderDetails d-flex">
+                                        <div class="w-50">
+                                            <div class="d-flex justify-content-between">
+                                                <div>Récapitulatif :</div>
+                                                <div class="d-flex">
+                                                    <div class="ordRecapQuantity">1</div>&nbsp;x&nbsp;<div class="ordRecapPrice">{{ meal.meal_boxes|first.price }}</div>€
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between mt-1">
+                                                <div><u>Total de la commande :</u></div>
+                                                <div class="d-flex"><div class="orderPriceTotal">{{ meal.meal_boxes|first.price }}</div>€</div>
+                                            </div>
+                                        </div>
+                                        <div class="w-50 d-flex justify-content-end">
+                                            <div class="mainBtn validateBtn btn" data-slide-to="4">Voir les chefs</div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
-                </div>
-                <div class="boxOrderItem d-none" data-recette-order="gyozas-&-raviolis">
-                    <div class="boxOrderDetailsContainer d-flex justify-content-between bg-white p-4 mb-3" style="border-radius: 4px">
-                        <div class="d-flex align-items-center">
-                            <div style="width: 79px">
-                                <img class="boxDetailsImg position-absolute" src="{{ asset('build/images/meals/gyozas-&-raviolis.svg') }}" alt="meal-gyozas-&-raviolis">
-                            </div>
-                            <div class="boxDetailsName ml-3">Gyozas & Raviolis</div>
-                        </div>
-                        <i class="fa-solid fa-chevron-down mt-2" style="color: #EFAF00"></i>
-                    </div>
-                    <div class="boxOrderDetailsContainer bg-white px-4 py-3" style="border-radius: 4px">
-                        <div class="choiceCardsList d-flex">
-                            <div class="w-50 mr-2">
-                                <div class="boxOrderTitle mb-1">Box Basic</div>
-                                <div class="choiceCard active px-4 pb-4 pt-3">
-                                    <div class="text-center mb-2">
-                                        <i class="fa-regular fa-circle-dot fa-lg choiceRadio"></i>
-                                    </div>
-                                    <p class="text-center cardText mx-3">La box est composée d’ingredients frais et savoureux pour les petits budgets.</p>
-                                    <div class="boxOrderDetails text-center"><u>En savoir plus</u></div>
-                                    <div class="mt-4 d-flex justify-content-center orderPrices">
-                                        <div class="d-flex">
-                                            <div class="orderIncrementBtn text-white p-2" data-incr-type="-" style="background: #E7871E">-</div>
-                                            <div class="orderQuantity bg-white p-2" style="color: #E7871E">1</div>
-                                            <div class="orderIncrementBtn text-white p-2" data-incr-type="+" style="background: #E7871E">+</div>
-                                        </div>
-                                        <div class="d-flex bg-white py-2 px-3 ml-2 font-weight-bold" style="color: #E7871E">
-                                            <div class="orderPrice">27</div>€
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-50 ml-2">
-                                <div class="boxOrderTitle mb-1">Box Premium</div>
-                                <div class="choiceCard px-4 pb-4 pt-3">
-                                    <div class="text-center mb-2">
-                                        <i class="fa-regular fa-circle-dot fa-lg choiceRadio"></i>
-                                    </div>
-                                    <p class="text-center cardText mx-3">La box favorise des ingredients Bio et des produits locaux. Tu pourras retrouver des surprises dans ta box !</p>
-                                    <div class="boxOrderDetails text-center"><u>En savoir plus</u></div>
-                                    <div class="mt-4 d-flex justify-content-center orderPrices">
-                                        <div class="d-flex">
-                                            <div class="orderIncrementBtn text-white p-2" data-incr-type="-" style="background: #E7871E">-</div>
-                                            <div class="orderQuantity bg-white p-2" style="color: #E7871E">1</div>
-                                            <div class="orderIncrementBtn text-white p-2" data-incr-type="+" style="background: #E7871E">+</div>
-                                        </div>
-                                        <div class="d-flex bg-white py-2 px-3 ml-2 font-weight-bold" style="color: #E7871E">
-                                            <div class="orderPrice">40</div>€
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="w-100">
-                        <div class="boxOrderDetails d-flex">
-                            <div class="w-50">
-                                <div class="d-flex justify-content-between">
-                                    <div>Récapitulatif :</div>
-                                    <div class="d-flex"><div class="ordRecapQuantity">1</div>&nbsp;x&nbsp;<div class="ordRecapPrice">27</div>€</div>
-                                </div>
-                                <div class="d-flex justify-content-between mt-1">
-                                    <div><u>Total de la commande :</u></div>
-                                    <div class="d-flex"><div class="orderPriceTotal">27</div>€</div>
-                                </div>
-                            </div>
-                            <div class="w-50 d-flex justify-content-end">
-                                <div class="mainBtn validateBtn btn">Ajouter au panier</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

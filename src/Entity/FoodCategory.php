@@ -97,7 +97,7 @@ class FoodCategory
     {
         if (!$this->meals->contains($meal)) {
             $this->meals[] = $meal;
-            $meal->setFoodCategoryId($this);
+            $meal->setFoodCategory($this);
         }
 
         return $this;
@@ -107,8 +107,8 @@ class FoodCategory
     {
         if ($this->meals->removeElement($meal)) {
             // set the owning side to null (unless already changed)
-            if ($meal->getFoodCategoryId() === $this) {
-                $meal->setFoodCategoryId(null);
+            if ($meal->getFoodCategory() === $this) {
+                $meal->setFoodCategory(null);
             }
         }
 
