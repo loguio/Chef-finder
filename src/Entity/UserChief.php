@@ -71,6 +71,11 @@ class UserChief
     public array $equipments = [];
 
     /**
+     * @ORM\Column(type="json")
+     */
+    public array $requiredEquipments = [];
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private ?string $picture;
@@ -164,7 +169,7 @@ class UserChief
     }
 
     /**
-     * @return Collection|Booking[]
+     * @return Collection
      */
     public function getBookings(): Collection
     {
@@ -194,7 +199,7 @@ class UserChief
     }
 
     /**
-     * @return Collection|Live[]
+     * @return Collection
      */
     public function getLives(): Collection
     {
@@ -243,6 +248,18 @@ class UserChief
     public function setEquipments(array $equipments): self
     {
         $this->equipments = $equipments;
+
+        return $this;
+    }
+
+    public function getRequiredEquipments(): ?array
+    {
+        return $this->requiredEquipments;
+    }
+
+    public function setRequiredEquipments(array $requiredEquipments): self
+    {
+        $this->requiredEquipments = $requiredEquipments;
 
         return $this;
     }

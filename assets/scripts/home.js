@@ -44,7 +44,7 @@ $(".swiper-pagination, .swpSlideContainer, .formContainer, .boxOrder").css({
 
 $(".formContainer").css({"margin-top": navbarHeight + "px"});
 
-$("#swpCookingTypesContainer, #swpPresentationContainer, .boxOrderDetailsContainer, #swpChiefsContainer").css({
+$("#swpCookingTypesContainer, #swpPresentationContainer, .boxOrderDetailsContainer, #swpChiefsContainer, #swpSummaryContainer, #swpPaymentContainer, #swpConfirmContainer").css({
     "width": "calc(94% - " + swpPagination + "px)"
 });
 
@@ -57,10 +57,23 @@ $(".cakeFountain, .womanChiefImg").css({
 
 
 // Get the slide to go to (from buttons), and change the current slide to the desired one with a fade animation
-$(".mainBtn[data-slide-to]").click(function () {
+$(".mainBtn[data-slide-to]").not('.disabled').click(function () {
     let goToSlide = $(this).data("slide-to");
     $(".swiper-pagination").fadeTo(200, 1);
     swiper.slideTo(goToSlide, 350);
+});
+
+
+// Manage the "Validate Order" btn and confirmation screen
+$(".validateOrderBtn").click(function () {
+    if (!$("#swpConfirmContainer .confirmWaiting").hasClass("d-none")) {
+        if (!$(this).hasClass("disabled")) {
+            $("#swpConfirmContainer .confirmWaiting, #swpConfirmContainer .confirmCompleted").toggleClass("d-none").toggleClass("d-flex");
+            let goToSlide = $(this).data("slide-to");
+            $(".swiper-pagination").fadeTo(200, 1);
+            swiper.slideTo(goToSlide, 350);
+        }
+    }
 });
 
 
@@ -73,6 +86,13 @@ $(".mainBtn.switchStep").click(function () {
 // Toggle active state for cards (text, color, and radio buttons)
 $(".choiceCard").click(function () {
     $(this).closest('.choiceCardsList').find('.choiceCard').removeClass("active");
+    $(this).addClass("active");
+});
+
+
+// Toggle active state for payment methods
+$(".paymentModel").click(function () {
+    $(this).closest('#swpPaymentContainer').find('.paymentModel').removeClass("active");
     $(this).addClass("active");
 });
 
@@ -108,6 +128,29 @@ $(".mealTypeList .listItem").click(function () {
 });
 
 
+// Change chosen chief in recap based on chiefs carousel
+$("#chiefCarouselIndicators a").click(function () {
+    let indicators = $("#chiefCarouselIndicators a");
+    setTimeout(function () {
+        let swpWrapper = indicators.closest('.swiper-wrapper');
+        let activeChief = indicators.closest('#swpChiefsContainer').find('.carousel-item.active').data("chief");
+        swpWrapper.find('.recapChief').addClass("d-none").removeClass("d-flex");
+        swpWrapper.find('.recapChief[data-chief="' + activeChief + '"]').addClass("d-flex").removeClass("d-none");
+    }, 605);
+});
+
+
+// Change background on forms Slides on homepage
+swiper.on('slideChangeTransitionStart', function () {
+    let calendarSlide = $("#swpCalendarContainer").parent();
+    if (calendarSlide.hasClass("swiper-slide-active")) {
+        $("#navbar, #socialIcons, .swiper.mySwiper").addClass("formSlide");
+    } else {
+        $("#navbar, #socialIcons, .swiper.mySwiper").removeClass("formSlide");
+    }
+});
+
+
 // Add a fade animation on slide change
 swiper.on('slideChange', function () {
     $(".swiper-pagination").fadeTo(200, 1);
@@ -127,7 +170,7 @@ $(overflowList).mouseleave(function () {
 
 
 // Manage the dynamic box order numbers (price, quantity, total)
-$(".choiceCard .orderIncrementBtn").click(function () {
+$("#swpRecipesContainer .choiceCard .orderIncrementBtn").click(function () {
     let incrType = $(this).data("incr-type");
     let quantityTxt = $(this).closest('.choiceCard.active').find('.orderQuantity');
     let priceTxt = $(this).closest('.choiceCard.active').find('.orderPrice');
@@ -144,6 +187,18 @@ $(".choiceCard .orderIncrementBtn").click(function () {
     ordRecapPrice.text(priceTxt.text());
     ordPriceTotal.text(quantityTxt.text() * priceTxt.text());
 
+});
+
+
+$("#swpRecipesContainer .choiceCard").click(function () {
+    let quantityTxt = $(this).find('.orderQuantity');
+    let priceTxt = $(this).find('.orderPrice');
+    let ordRecapQuant = $(this).closest('.boxOrderDetailsContainer').find('.ordRecapQuantity');
+    let ordRecapPrice = $(this).closest('.boxOrderDetailsContainer').find('.ordRecapPrice');
+    let ordPriceTotal = $(this).closest('.boxOrderDetailsContainer').find('.orderPriceTotal');
+    ordRecapQuant.text(quantityTxt.text());
+    ordRecapPrice.text(priceTxt.text());
+    ordPriceTotal.text(quantityTxt.text() * priceTxt.text());
 });
 
 
@@ -174,7 +229,155 @@ $(function () {
 });
 
 
+// Bind the forms values to recap screen
+$(function () {
+    $('#swpCalendarContainer #deliveryAddress').on('input', function () {
+        $('.recapAddressDelivery').text(this.value).prop('title', this.value);
+        $('.validateOrderBtn').attr("data-deliv-address", "filled");
+        if (!this.value) {
+            $('.recapAddressDelivery').text("Non renseigné").prop('title', "Non renseigné");
+            $('.validateOrderBtn').attr("data-deliv-address", "empty");
+        }
+    });
+
+    $('#swpCalendarContainer #appointmentAddress').on('input', function () {
+        $('.recapAddressMeeting').text(this.value).prop('title', this.value);
+        $('.validateOrderBtn').attr("data-meet-address", "filled");
+        if (!this.value) {
+            $('.recapAddressMeeting').text("Non renseigné").prop('title', "Non renseigné");
+            $('.validateOrderBtn').attr("data-meet-address", "empty");
+        }
+    });
+
+    $('#swpCalendarContainer #orderDate').on('input', function () {
+        let date = new Date(this.value);
+        date = [String(date.getDate()).padStart(2, '0'), String(date.getMonth() + 1).padStart(2, '0'), date.getFullYear()].join('/');
+        $('.recapDate').text(date).prop('title', date);
+        $('.validateOrderBtn').attr("data-order-date", "filled");
+        if (!this.value) {
+            $('.recapDate').text("Non renseigné");
+            $('.validateOrderBtn').attr("data-order-date", "empty");
+        }
+    });
+
+    $('#swpCalendarContainer #orderTime').on('input', function () {
+        let time = new Date(this.valueAsDate);
+        time = [('0' + time.getUTCHours()).slice(-2), ('0' + time.getUTCMinutes()).slice(-2)].join(':');
+        $('.recapTime').text(time).prop('title', time);
+        $('.validateOrderBtn').attr("data-order-time", "filled");
+        if (!this.value) {
+            $('.recapTime').text("Non renseigné");
+            $('.validateOrderBtn').attr("data-order-time", "empty");
+        }
+    });
+
+    $('#swpPaymentContainer #inputCardNumber').on('input', function () {
+        $('.validateOrderBtn').attr("data-card-number", "filled");
+        if (!this.value) {
+            $('.validateOrderBtn').attr("data-card-number", "empty")
+        }
+    });
+
+    $('#swpPaymentContainer #inputCardExpDate').on('input', function () {
+        $('.validateOrderBtn').attr("data-card-exp", "filled");
+        if (!this.value) {
+            $('.validateOrderBtn').attr("data-card-exp", "empty")
+        }
+    });
+
+    $('#swpPaymentContainer #inputCardCcv').on('input', function () {
+        $('.validateOrderBtn').attr("data-card-cvv", "filled");
+        if (!this.value) {
+            $('.validateOrderBtn').attr("data-card-cvv", "empty")
+        }
+    });
+})
+
+
+// Bind the chosen box/meal infos to recap screen
+$('#swpRecipesContainer .choiceCard, #swpRecipesContainer .orderIncrementBtn, #swpRecipesContainer .boxList .listItem').click(function () {
+    let activeMeal = $('#swpRecipesContainer .boxOrderItem:not(.d-none)');
+    let mealName = activeMeal.find('.boxDetailsName').text();
+    let mealPicture = activeMeal.find('.boxDetailsImg').attr('src');
+    let boxName = activeMeal.find('.choiceCard.active').closest('.w-50').find('.boxOrderTitle').text();
+    let boxDescription = activeMeal.find('.choiceCard.active .cardText').text();
+    let boxQuantity = activeMeal.find('.ordRecapQuantity').text();
+    let boxPrice = activeMeal.find('.ordRecapPrice').text();
+    let boxTotalPrice = activeMeal.find('.orderPriceTotal').text();
+
+    $('#swpSummaryContainer .boxDetailsName').text(mealName);
+    $('#swpSummaryContainer .boxDetailsImg').prop('src', mealPicture).prop('alt', mealName);
+    $('#swpSummaryContainer .boxName, #swpPaymentContainer .boxName').text(boxName);
+    $('#swpSummaryContainer .boxDescription, #swpPaymentContainer .boxDescription').text(boxDescription);
+    $('#swpSummaryContainer .ordRecapQuantity, #swpPaymentContainer .ordRecapQuantity').text(boxQuantity).prop('title', boxQuantity);
+    $('#swpSummaryContainer .ordRecapPrice, #swpPaymentContainer .ordRecapPrice').text(boxPrice).prop('title', boxPrice);
+    $('#swpSummaryContainer .orderPriceTotal, #swpPaymentContainer .orderPriceTotal').text(boxTotalPrice).prop('title', boxTotalPrice);
+});
+
+
+//For Card Number formatted input
+let cardNum = document.getElementById('inputCardNumber');
+cardNum.onkeyup = function () {
+    if (this.value === this.lastValue) return;
+    let caretPosition = this.selectionStart;
+    let sanitizedValue = this.value.replace(/[^0-9]/gi, '');
+    let parts = [];
+    let i = 0;
+    let len = sanitizedValue.length;
+    for (; i < len; i += 4) {
+        parts.push(sanitizedValue.substring(i, i + 4));
+    }
+    for (i = caretPosition - 1; i >= 0; i--) {
+        let c = this.value[i];
+        if (c < '0' || c > '9') {
+            caretPosition--;
+        }
+    }
+    caretPosition += Math.floor(caretPosition / 4);
+    this.value = this.lastValue = parts.join(' ');
+    this.selectionStart = this.selectionEnd = caretPosition;
+}
+
+//For Date formatted input
+let expDate = document.getElementById('inputCardExpDate');
+expDate.onkeyup = function () {
+    if (this.value === this.lastValue) return;
+    let caretPosition = this.selectionStart;
+    let sanitizedValue = this.value.replace(/[^0-9]/gi, '');
+    let parts = [];
+    let i, len;
+    for (i = 0, len = sanitizedValue.length; i < len; i += 2) {
+        parts.push(sanitizedValue.substring(i, i + 2));
+    }
+    for (i = caretPosition - 1; i >= 0; i--) {
+        const c = this.value[i];
+        if (c < '0' || c > '9') {
+            caretPosition--;
+        }
+    }
+    caretPosition += Math.floor(caretPosition / 2);
+    this.value = this.lastValue = parts.join('/');
+    this.selectionStart = this.selectionEnd = caretPosition;
+}
+
+
+// Check for all forms values to activate order button
+$(function () {
+    let validateBtn = $('.validateOrderBtn');
+    $('.mySwiper input').on('input', function () {
+        if (validateBtn.attr("data-deliv-address") === "filled" && validateBtn.attr("data-meet-address") === "filled" && validateBtn.attr("data-order-date") === "filled"
+            && validateBtn.attr("data-order-time") === "filled" && validateBtn.attr("data-card-number") === "filled" && validateBtn.attr("data-card-exp") === "filled"
+            && validateBtn.attr("data-card-cvv") === "filled")
+        {
+            validateBtn.removeClass('disabled');
+        } else {
+            validateBtn.addClass('disabled');
+        }
+    });
+});
+
+
 // Debug to work en slides and auto scroll to the desired one
-swiper.slideTo(4, 350);
+swiper.slideTo(8, 350);
 
 

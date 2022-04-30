@@ -1,5 +1,158 @@
+<style>
+    #swpSummaryContainer .choiceCard:hover {
+        cursor: initial;
+    }
+
+    .recapBoxText {
+        font-family: 'Roboto',serif;
+        font-size: smaller;
+    }
+
+    .recapAddressDelivery, .recapAddressMeeting {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .recapChiefName {
+        font-size: 21px;
+        color: #EFAF00;
+    }
+
+    .recapChiefImg {
+        width: 79px;
+        transform: translate(0, -60%);
+        border-radius: 8px;
+    }
+</style>
 <div class="swiper-slide d-flex flex-row align-items-end">
-    <div class="swpSlideContainer w-100">
-        Slide 7
+    <div class="swpSlideContainer" id="swpSummaryContainer">
+        <div class="pageTitle w-75 mt-4 mb-5 px-3">
+            <h2>Récapitulatif de vos informations</h2>
+        </div>
+        <div class="firstStep mx-5">
+            <div class="d-flex">
+                <div class="col-6">
+                    <div class="boxOrderItem">
+                        <div class="bg-white px-4 pb-3 pt-4" style="border-radius: 4px">
+                            <div class="d-flex align-items-center mb-3">
+                                <div style="width: 79px">
+                                    <img class="boxDetailsImg position-absolute" src="{{ asset('build/images/meals/wok.svg') }}" alt="Wok de crevettes thaï">
+                                </div>
+                                <div class="boxDetailsName ml-3">Wok de crevettes thaï</div>
+                            </div>
+                            <div class="choiceCardsList mt-5">
+                                <div class="boxOrderTitle boxName mb-1 text-left">Box Basic</div>
+                                <div class="choiceCard px-4 pb-4 pt-3 active">
+                                    <p class="recapBoxText boxDescription text-muted mx-3">La box est composée d’ingrédients frais et savoureux pour les petits budgets.</p>
+                                    <hr class="w-100">
+                                    <div class="boxOrderDetails">
+                                        <div class="d-flex justify-content-between">
+                                            <div>Récapitulatif :</div>
+                                            <div class="d-flex">
+                                                <div class="ordRecapQuantity">1</div>&nbsp;x&nbsp;<div class="ordRecapPrice">15</div>€
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-1">
+                                            <div><u>Total de la commande :</u></div>
+                                            <div class="d-flex">
+                                                <div class="orderPriceTotal">15</div>€
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-3">
+                                <div class="w-50 mr-2 mainBtn returnBtn btn" data-slide-to="2">Modifier votre type de cuisine</div>
+                                <div class="w-50 ml-2 mainBtn returnBtn btn" data-slide-to="3">Modifier votre box</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="bg-white h-100 px-4 py-3" style="border-radius: 4px">
+                        <div class="choiceCardsList">
+                            <div class="boxOrderTitle mb-2 mt-1 text-left">Adresses</div>
+                            <div class="choiceCard recapBoxText text-muted px-4 pb-4 pt-3 active">
+                                <div class="d-flex justify-content-between">
+                                    <div class="w-50">Adresse de livraison box :</div>
+                                    <div class="recapAddressDelivery text-right w-50" title="Non renseigné">Non renseigné</div>
+                                </div>
+                                <div class="d-flex justify-content-between mt-1">
+                                    <div class="w-50">Adresse du rendez-vous :</div>
+                                    <div class="recapAddressMeeting text-right w-50" title="Non renseigné">Non renseigné</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="choiceCardsList mt-3">
+                            <div class="boxOrderTitle mb-2 text-left">Date & Heures</div>
+                            <div class="choiceCard recapBoxText text-muted px-4 pb-4 pt-3 active">
+                                <div class="d-flex justify-content-between">
+                                    <div>La date :</div>
+                                    <div class="recapDate">Non renseigné</div>
+                                </div>
+                                <div class="d-flex justify-content-between mt-1">
+                                    <div>L’heure :</div>
+                                    <div class="recapTime">Non renseigné</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex mt-4">
+                            <div class="w-50 mr-2 mainBtn returnBtn btn" data-slide-to="5">Modifier votre adresse et date</div>
+                            <div class="w-50 ml-2 mainBtn validateBtn switchStep btn">Étape suivante</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="secondStep d-none">
+            {% for chief in chiefs %}
+                <div class="recapChief mt-2 {{ loop.first ? 'd-flex' : 'd-none' }}" data-chief="{{ chief.firstName ~ chief.lastName }}">
+                    <div class="w-25 mr-3">
+                        <div class="boxOrderItem">
+                            <div class="bg-white p-4" style="border-radius: 4px">
+                                <div class="d-flex align-items-center">
+                                    <div style="width: 79px">
+                                        <img class="recapChiefImg position-absolute bg-white" src="{{ asset('build/images/chiefs/' ~ chief.picture ) }}" alt="{{ chief.firstName ~ chief.lastName }}">
+                                    </div>
+                                    <div class="recapChiefName w-100 text-center ml-4">{{ chief.firstName ~ " " ~ chief.lastName }}</div>
+                                </div>
+                                <div class="greetingsText font-italic mx-3 text-center font-weight-light mt-5">Demandes de matériels requis par le chef</div>
+                                <div class="mt-4 d-flex flex-column">
+                                    {% for requiredEquipment in chief.requiredEquipments %}
+                                        <div class="d-flex my-1">
+                                            <div><i class="fa-regular {{ requiredEquipment["has"] == "0" ? 'fa-square' : 'fa-square-check' }} fa-lg text-warning"></i></div>
+                                            <div class="chiefDescription ml-2">{{ requiredEquipment["name"] }}</div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-75 ml-3 mr-5">
+                        <div class="boxOrderItem">
+                            <div class="bg-white px-4 pb-2" style="border-radius: 4px">
+                                <div class="greetingsText py-4 font-italic font-weight-light">Le chef possède comme matériel à emporter :</div>
+                                <div class="d-flex mb-3 mt-2 py-4 justify-content-around" style="background: rgba(239, 175, 0, 0.1); border-radius: 4px">
+                                    {% for equipment in chief.equipments %}
+                                        <div class="d-flex flex-column py-2 mt-2">
+                                            <img class="mx-auto" src="{{ asset('build/images/equipments/' ~ equipment|slug ~ '.svg' ) }}" alt="{{ equipment|slug }}">
+                                            <div class="chiefEquipmentName mt-2"> {{ equipment }}</div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="d-flex mb-3">
+                                    <div class="mr-2 mainBtn returnBtn switchStep btn">Retour à vos informations</div>
+                                    <div class="ml-2 mainBtn returnBtn btn" data-slide-to="4">Modifier le choix de votre chef</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mt-3">
+                            <div class="mainBtn validateBtn btn" data-slide-to="7">Étape suivante</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </div>

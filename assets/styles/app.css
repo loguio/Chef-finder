@@ -99,6 +99,19 @@ body {
     background-color: #c3c3c3;
 }
 
+.formSlide {
+    background: linear-gradient(to right, #EFAF00 25%, #F7F3EF 25%, #F7F3EF 25%);
+}
+
+#socialIcons.formSlide a {
+    color: white;
+}
+
+#socialIcons.formSlide i:hover {
+    color: #5d5d5d;
+}
+
+
 /* Footer */
 
 #socialIcons {
@@ -140,6 +153,15 @@ body {
 .returnBtn {
     background: #E1D8CD;
     color: #4E4E4E;
+}
+
+.returnBtn:hover {
+    background: #d1d1d1;
+}
+
+.validateBtn:hover {
+    background: #fb9b1b;
+    color: white;
 }
 
 
@@ -186,8 +208,8 @@ body {
 /* Carousels */
 
 .carousel-control-next-icon, .carousel-control-prev-icon {
-    background-color: rgba(0, 0, 0, 0.25);
-    background-size: 60%;
+    background-color: #EFAF00;
+    background-size: 50%;
 }
 
 

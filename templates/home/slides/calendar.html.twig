@@ -1,5 +1,38 @@
 <div class="swiper-slide d-flex flex-row align-items-end">
-    <div class="swpSlideContainer w-100">
-        Slide 6
+    <div class="swpSlideContainer w-100" id="swpCalendarContainer">
+        <div class="row h-100 mx-0">
+            <div class="col-6 px-0 d-flex justify-content-end">
+                <div class="formBlock col-7 mr-5 mb-2 py-2 px-5 bg-white text-center d-flex flex-column justify-content-between">
+                    <div class="mb-3">
+                        <div class="formTitle mt-1 text-left">Heure et date</div>
+                        <div class="formSubTitle mt-1 text-left">Renseignez vos informations de livraison</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="w-100 text-left mb-1 small" for="deliveryAddress">Adresse de livraison box</label>
+                        <input type="text" maxlength="255" id="deliveryAddress" name="deliveryAddress" placeholder="4 rue d’adresse de livraison" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="w-100 text-left mb-1 small" for="appointmentAddress">Adresse du rendez-vous</label>
+                        <input type="text" maxlength="255" id="appointmentAddress" name="appointmentAddress" placeholder="4 rue d’adresse de rdv" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="w-100 text-left mb-1 small" for="orderDate">Quelle est la date ?</label>
+                        <input type="date" id="orderDate" name="orderDate" class="form-control" min="{{ "now"|date("Y-m-d") }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="w-100 text-left mb-1 small" for="orderTime">Quelle est l’heure ?</label>
+                        <input type="time" id="orderTime" name="orderTime" class="form-control" required>
+                    </div>
+                    <div class="mainBtn validateBtn btn mx-auto mb-2" style="width: fit-content" data-slide-to="6">Validation des informations</div>
+                    <div class="formText text-justify mb-1" style="font-size: 70%">
+                        <i class="fa-solid fa-circle-info fa-lg"></i> Votre box arrive à la même date que votre
+                        rendez-vous, afin d’avoir des produits frais à utiliser dans la journée même.
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 px-0 d-flex justify-content-center">
+                <img class="w-75" src="{{ asset('build/images/slides/woman-calendar.svg') }}" alt="Calendar" title="Calendar"/>
+            </div>
+        </div>
     </div>
 </div>
