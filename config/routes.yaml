@@ -19,6 +19,10 @@ app_customer_register:
   path: /register
   methods: GET
 
+app_new_customer:
+  path: /register-process
+  methods: POST
+
 app_customer_logout:
   path: /logout
   methods: GET
@@ -43,6 +47,10 @@ app_chief_logout:
 
 # Orders -------------------------------------------------------
 
+app_new_order:
+  path: /new-order
+  methods: POST
+
 app_orders:
   path: /reservations
   methods: GET
@@ -58,5 +66,5 @@ app_about_us:
   methods: GET
 
 app_contact:
-  path: /contact
+  path: /nous-contacter
   methods: GET

@@ -72,6 +72,9 @@ $(".validateOrderBtn").click(function () {
             let goToSlide = $(this).data("slide-to");
             $(".swiper-pagination").fadeTo(200, 1);
             swiper.slideTo(goToSlide, 350);
+            setTimeout(function () {
+                $("#hiddenOrderForm").submit();
+            }, 1750);
         }
     }
 });
@@ -79,7 +82,9 @@ $(".validateOrderBtn").click(function () {
 
 // Manage the switch of steps for multi-content screens on the homepage
 $(".mainBtn.switchStep").click(function () {
-    $(".firstStep, .secondStep").toggleClass('d-none').css({"animation" : 'fadeBlock 350ms ease-in-out both'});
+    $(this).closest('.swpSlideContainer').find(".firstStep, .secondStep")
+        .toggleClass('d-none')
+        .css({"animation": 'fadeBlock 350ms ease-in-out both'});
 });
 
 
@@ -122,9 +127,9 @@ $(".mealTypeList .listItem").click(function () {
     cookingTypeMeals.addClass("d-flex").removeClass("d-none").css({"animation" : 'fadeBlock 250ms ease-in-out both'});
     mealsList.removeClass("active");
     cookingTypeMeals.not('.d-none').first().addClass("active");
-    swpWrapper.find('.boxOrderItem').addClass("d-none");
+    swpWrapper.find('#swpRecipesContainer .boxOrderItem').addClass("d-none");
     let activeMeal = swpWrapper.find('.boxList .listItem.active').data("box");
-    swpWrapper.find('.boxOrderItem[data-recette-order="' + activeMeal + '"]').removeClass("d-none");
+    swpWrapper.find('#swpRecipesContainer .boxOrderItem[data-recette-order="' + activeMeal + '"]').removeClass("d-none");
 });
 
 
@@ -134,8 +139,10 @@ $("#chiefCarouselIndicators a").click(function () {
     setTimeout(function () {
         let swpWrapper = indicators.closest('.swiper-wrapper');
         let activeChief = indicators.closest('#swpChiefsContainer').find('.carousel-item.active').data("chief");
+        let activeChiefId = indicators.closest('#swpChiefsContainer').find('.carousel-item.active').data("chief-id");
         swpWrapper.find('.recapChief').addClass("d-none").removeClass("d-flex");
         swpWrapper.find('.recapChief[data-chief="' + activeChief + '"]').addClass("d-flex").removeClass("d-none");
+        $('#hiddenChiefId').val(activeChiefId);
     }, 605);
 });
 
@@ -234,18 +241,22 @@ $(function () {
     $('#swpCalendarContainer #deliveryAddress').on('input', function () {
         $('.recapAddressDelivery').text(this.value).prop('title', this.value);
         $('.validateOrderBtn').attr("data-deliv-address", "filled");
+        $('#hiddenDeliveryAddress').val(this.value);
         if (!this.value) {
             $('.recapAddressDelivery').text("Non renseigné").prop('title', "Non renseigné");
             $('.validateOrderBtn').attr("data-deliv-address", "empty");
+            $('#hiddenDeliveryAddress').val("vide");
         }
     });
 
     $('#swpCalendarContainer #appointmentAddress').on('input', function () {
         $('.recapAddressMeeting').text(this.value).prop('title', this.value);
         $('.validateOrderBtn').attr("data-meet-address", "filled");
+        $('#hiddenAppointmentAddress').val(this.value);
         if (!this.value) {
             $('.recapAddressMeeting').text("Non renseigné").prop('title', "Non renseigné");
             $('.validateOrderBtn').attr("data-meet-address", "empty");
+            $('#hiddenAppointmentAddress').val("vide");
         }
     });
 
@@ -254,9 +265,11 @@ $(function () {
         date = [String(date.getDate()).padStart(2, '0'), String(date.getMonth() + 1).padStart(2, '0'), date.getFullYear()].join('/');
         $('.recapDate').text(date).prop('title', date);
         $('.validateOrderBtn').attr("data-order-date", "filled");
+        $('#hiddenDate').val(date);
         if (!this.value) {
             $('.recapDate').text("Non renseigné");
             $('.validateOrderBtn').attr("data-order-date", "empty");
+            $('#hiddenDate').val("vide");
         }
     });
 
@@ -265,9 +278,11 @@ $(function () {
         time = [('0' + time.getUTCHours()).slice(-2), ('0' + time.getUTCMinutes()).slice(-2)].join(':');
         $('.recapTime').text(time).prop('title', time);
         $('.validateOrderBtn').attr("data-order-time", "filled");
+        $('#hiddenTime').val(time);
         if (!this.value) {
             $('.recapTime').text("Non renseigné");
             $('.validateOrderBtn').attr("data-order-time", "empty");
+            $('#hiddenTime').val("vide");
         }
     });
 
@@ -295,11 +310,12 @@ $(function () {
 
 
 // Bind the chosen box/meal infos to recap screen
-$('#swpRecipesContainer .choiceCard, #swpRecipesContainer .orderIncrementBtn, #swpRecipesContainer .boxList .listItem').click(function () {
+$('#swpRecipesContainer .choiceCard, #swpRecipesContainer .orderIncrementBtn, #swpRecipesContainer .boxList .listItem, #swpCookingTypesContainer .mealTypeList .listItem').click(function () {
     let activeMeal = $('#swpRecipesContainer .boxOrderItem:not(.d-none)');
     let mealName = activeMeal.find('.boxDetailsName').text();
     let mealPicture = activeMeal.find('.boxDetailsImg').attr('src');
     let boxName = activeMeal.find('.choiceCard.active').closest('.w-50').find('.boxOrderTitle').text();
+    let boxId = activeMeal.find('.choiceCard.active').closest('.w-50').find('.boxOrderTitle').data("box-id");
     let boxDescription = activeMeal.find('.choiceCard.active .cardText').text();
     let boxQuantity = activeMeal.find('.ordRecapQuantity').text();
     let boxPrice = activeMeal.find('.ordRecapPrice').text();
@@ -312,6 +328,10 @@ $('#swpRecipesContainer .choiceCard, #swpRecipesContainer .orderIncrementBtn, #s
     $('#swpSummaryContainer .ordRecapQuantity, #swpPaymentContainer .ordRecapQuantity').text(boxQuantity).prop('title', boxQuantity);
     $('#swpSummaryContainer .ordRecapPrice, #swpPaymentContainer .ordRecapPrice').text(boxPrice).prop('title', boxPrice);
     $('#swpSummaryContainer .orderPriceTotal, #swpPaymentContainer .orderPriceTotal').text(boxTotalPrice).prop('title', boxTotalPrice);
+
+    $('#hiddenBoxQuantity').val(boxQuantity);
+    $('#hiddenPrice').val(boxTotalPrice);
+    $('#hiddenBoxId').val(boxId);
 });
 
 
@@ -367,7 +387,7 @@ $(function () {
     $('.mySwiper input').on('input', function () {
         if (validateBtn.attr("data-deliv-address") === "filled" && validateBtn.attr("data-meet-address") === "filled" && validateBtn.attr("data-order-date") === "filled"
             && validateBtn.attr("data-order-time") === "filled" && validateBtn.attr("data-card-number") === "filled" && validateBtn.attr("data-card-exp") === "filled"
-            && validateBtn.attr("data-card-cvv") === "filled")
+            && validateBtn.attr("data-card-cvv") === "filled" && $('#hiddenCustomerId').attr("value") !== "vide")
         {
             validateBtn.removeClass('disabled');
         } else {
@@ -378,6 +398,6 @@ $(function () {
 
 
 // Debug to work en slides and auto scroll to the desired one
-swiper.slideTo(8, 350);
+// swiper.slideTo(8, 350);
 
 

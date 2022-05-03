@@ -12,28 +12,73 @@
 
 {% block body %}
 
-<div class="app">
-    {{ include('layout/navbar/index.html.twig') }}
-    <div class="vh-100 swiper mySwiper">
-        <div class="swiper-wrapper">
-            {{ include('home/slides/hello.html.twig') }}
-            {{ include('home/slides/presentation.html.twig') }}
-            {{ include('home/slides/cookingtypes.html.twig') }}
-            {{ include('home/slides/recipes.html.twig') }}
-            {{ include('home/slides/chiefs.html.twig') }}
-            {{ include('home/slides/calendar.html.twig') }}
-            {{ include('home/slides/summary.html.twig') }}
-            {{ include('home/slides/payment.html.twig') }}
-            {{ include('home/slides/confirm.html.twig') }}
+    <div class="app">
+        {{ include('layout/navbar/index.html.twig') }}
+        <div class="vh-100 swiper mySwiper">
+            <div class="swiper-wrapper">
+                {{ include('home/slides/hello.html.twig') }}
+                {{ include('home/slides/presentation.html.twig') }}
+                {{ include('home/slides/cookingtypes.html.twig') }}
+                {{ include('home/slides/recipes.html.twig') }}
+                {{ include('home/slides/chiefs.html.twig') }}
+                {{ include('home/slides/calendar.html.twig') }}
+                {{ include('home/slides/summary.html.twig') }}
+                {{ include('home/slides/payment.html.twig') }}
+                {{ include('home/slides/confirm.html.twig') }}
+            </div>
+            <div class="swiper-pagination col-1 d-flex flex-column justify-content-around"></div>
         </div>
-        <div class="swiper-pagination col-1 d-flex flex-column justify-content-around"></div>
+        <div class="position-absolute pb-1 w-100" id="socialIcons" style="z-index: 1">
+            <a href="https://facebook.com" class="mx-2" title="Page Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://instagram.com" class="mx-2" title="Page Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://linkedin.com" class="mx-2" title="Page Linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://youtube.com" class="mx-2" title="Chaine Youtube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <form method="post" action="/new-order" id="hiddenOrderForm">
+            <input type="hidden" id="hiddenCustomerId" name="customer_id" value="{{ app.user ? app.user.id : 'vide' }}">
+            <input type="hidden" id="hiddenChiefId" name="chief_id" value="{{ chiefs[0].id }}">
+            <input type="hidden" id="hiddenBoxId" name="box_id" value="{{ meals[0].meal_boxes[0].id }}">
+            <input type="hidden" id="hiddenDate" name="date" value="vide">
+            <input type="hidden" id="hiddenTime" name="time" value="vide">
+            <input type="hidden" id="hiddenBoxQuantity" name="box_quantity" value="1">
+            <input type="hidden" id="hiddenDeliveryAddress" name="delivery_address" value="vide">
+            <input type="hidden" id="hiddenAppointmentAddress" name="appointment_address" value="vide">
+            <input type="hidden" id="hiddenPrice" name="price" value="15">
+        </form>
+        <!-- Modal -->
+        <div class="modal fade" id="loginWarningModal" tabindex="-1" role="dialog"
+             aria-labelledby="loginWarningModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content border-0">
+                    <div class="modal-header flex-column border-0 pt-4">
+                        <button type="button" class="close pt-2 pb-0 pr-4" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 50px;">&times;</span>
+                        </button>
+                        <h5 class="modal-title mx-auto mt-2" id="loginWarningModalLabel">Pour continuer votre commande...</h5>
+                    </div>
+                    <div class="modal-body pb-0">
+                        <div class="modalSubText px-5 text-center mb-5 mx-5">
+                            Vous devez vous inscrire ou vous connectez pour poursuivre votre
+                            commande pour connaître vos préférences et votre équipement
+                            (four, frigo, casserole etc...)
+                        </div>
+                        <div class="d-flex justify-content-center mb-5">
+                            <div class="mainBtn returnBtn btn mr-2" data-dismiss="modal">Retour sur la page</div>
+                            <a href="{{ path('app_customer_login') }}" class="mainBtn validateBtn btn ml-2" title="Connexion">Se connecter ou s’inscrire</a>
+                        </div>
+                        <hr class="mb-1 mx-5" style="opacity: 0.2; border: 1px solid #A39B9B;">
+                    </div>
+                    <div class="modal-footer justify-content-center border-0 py-3">
+                        <div class="w-75 d-flex align-items-center">
+                            <i class="fa-solid fa-circle-info fa-lg"></i>
+                            <div class="ml-2 text-justify">Pas de soucis, une fois inscrit/connecté, vous serez directement redirigé
+                                vers cette page et pourrez explorer ou commander normalement.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="position-absolute pb-1 w-100" id="socialIcons" style="z-index: 1">
-        <a href="https://facebook.com" class="mx-2" title="Page Facebook"><i class="fa-brands fa-facebook"></i></a>
-        <a href="https://instagram.com" class="mx-2" title="Page Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://linkedin.com" class="mx-2" title="Page Linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a href="https://youtube.com" class="mx-2" title="Chaine Youtube"><i class="fa-brands fa-youtube"></i></a>
-    </div>
-</div>
 
 {% endblock %}

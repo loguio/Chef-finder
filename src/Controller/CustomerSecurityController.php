@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\UserCustomer;
 use App\Form\UserCustomerRegisterType;
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

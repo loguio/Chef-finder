@@ -7,11 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserChiefRepository::class)
  */
-class UserChief
+class UserChief implements UserInterface
 {
     /**
      * @ORM\Id
@@ -31,9 +32,14 @@ class UserChief
     private ?string $lastName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private ?string $email;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private array $roles = [];
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -49,11 +55,6 @@ class UserChief
      * @ORM\Column(type="string", length=255)
      */
     private ?string $company;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="chief", orphanRemoval=true)
-     */
-    private Collection $bookings;
 
     /**
      * @ORM\OneToMany(targetEntity=Live::class, mappedBy="userChief", orphanRemoval=true)
@@ -87,13 +88,19 @@ class UserChief
 
     #[Pure] public function __construct()
     {
-        $this->bookings = new ArrayCollection();
         $this->lives = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): static
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getFirstName(): ?string
@@ -164,36 +171,6 @@ class UserChief
     public function setCompany(string $company): self
     {
         $this->company = $company;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getBookings(): Collection
-    {
-        return $this->bookings;
-    }
-
-    public function addBooking(Booking $booking): self
-    {
-        if (!$this->bookings->contains($booking)) {
-            $this->bookings[] = $booking;
-            $booking->setChief($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBooking(Booking $booking): self
-    {
-        if ($this->bookings->removeElement($booking)) {
-            // set the owning side to null (unless already changed)
-            if ($booking->getChief() === $this) {
-                $booking->setChief(null);
-            }
-        }
 
         return $this;
     }
@@ -286,5 +263,54 @@ class UserChief
         $this->description = $description;
 
         return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }

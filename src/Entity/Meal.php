@@ -22,28 +22,28 @@ class Meal
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $name;
+    public ?string $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $description;
+    public ?string $description;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $picture;
+    public ?string $picture;
 
     /**
-     * @ORM\OneToMany(targetEntity=Box::class, mappedBy="meal_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Box::class, mappedBy="meal", orphanRemoval=true)
      */
-    private Collection $boxes;
+    public Collection $boxes;
 
     /**
      * @ORM\ManyToOne(targetEntity=FoodCategory::class, inversedBy="meals")
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?FoodCategory $food_category;
+    public ?FoodCategory $food_category;
 
     public function __construct()
     {

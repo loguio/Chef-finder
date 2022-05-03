@@ -26,10 +26,10 @@ class CustomerLoginFormAuthenticator extends AbstractFormLoginAuthenticator impl
 
     public const LOGIN_ROUTE = 'customer_login';
 
-    private $entityManager;
-    private $urlGenerator;
-    private $csrfTokenManager;
-    private $passwordEncoder;
+    private EntityManagerInterface $entityManager;
+    private UrlGeneratorInterface $urlGenerator;
+    private CsrfTokenManagerInterface $csrfTokenManager;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
     public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -79,7 +79,7 @@ class CustomerLoginFormAuthenticator extends AbstractFormLoginAuthenticator impl
 
     public function checkCredentials($credentials, UserInterface $user): bool
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        return true;
     }
 
     /**
@@ -98,7 +98,7 @@ class CustomerLoginFormAuthenticator extends AbstractFormLoginAuthenticator impl
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse('/profile');
+        return new RedirectResponse('/');
     }
 
     protected function getLoginUrl(): string

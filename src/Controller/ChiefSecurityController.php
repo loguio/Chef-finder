@@ -56,7 +56,7 @@ class ChiefSecurityController extends AbstractController
             $entityManager->persist($userChief);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_chief_login');
+            return $this->redirectToRoute('app_home');
         }
         return $this->render('security/chief/register.html.twig', [
             'userChiefAddForm' => $form->createView(),

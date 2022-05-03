@@ -24,8 +24,8 @@ body {
 }
 
 #NavLoginBtn {
-    border-radius: 10px;
-    background-color: #EFAF00 !important;
+    background: #E7871E !important;
+    border-radius: 4px;
     color: #F7F3EF;
     font-family: Roboto, serif;
 }
@@ -38,7 +38,7 @@ body {
     background-color: #E7871E !important;
 }
 
-#NavCartBtn:hover img {
+#NavOrdersBtn:hover img {
     filter: brightness(0) saturate(100%) invert(66%) sepia(15%) saturate(80%) hue-rotate(314deg) brightness(92%) contrast(87%);
 }
 
@@ -223,11 +223,6 @@ body {
     background: none;
 }
 
-.formApp #NavLoginBtn {
-    background: #E7871E !important;
-    border-radius: 4px;
-}
-
 .formApp .nav-item a:hover, .formApp .menuItemDot {
     color: #7c7c7c !important;
 }
@@ -273,7 +268,7 @@ body {
     color: #797979;
 }
 
-.formBlock input {
+.formBlock input, .formBlock textarea {
     background: rgba(239, 175, 0, 0.2);
     border-radius: 2px;
     padding: 1.5em;
@@ -283,7 +278,7 @@ body {
     color: #797979;
 }
 
-.formBlock input::placeholder {
+.formBlock input::placeholder, .formBlock textarea::placeholder {
     color: #BDB4A7 !important;
 }
 
@@ -297,7 +292,7 @@ body {
     border-radius: 2px;
 }
 
-.formBlock input:focus {
+.formBlock input:focus, .formBlock textarea:focus {
     background-color: rgba(239, 175, 0, 0.2);
     box-shadow: 0 0 0 0.2rem rgb(213 133 8 / 37%);
 }
@@ -311,5 +306,44 @@ body {
 .formBlock .formSubmitBtn:focus {
     box-shadow: none;
 }
+
+.alreadyConnectedTitle {
+    font-family: Sofia Pro, serif;
+    font-size: 25px;
+    color: #4E4E4E;
+}
+
+
+/* Modal */
+
+#loginWarningModalLabel {
+    font-size: 31px;
+    color: #EFAF00;
+}
+
+.modal-backdrop {
+    background: rgba(116, 114, 103, 0.35) !important;
+    backdrop-filter: blur(2px) !important;
+}
+
+.modal-content {
+    border-radius: 10px;
+    background: #fbfbfb !important;
+}
+
+.modalSubText {
+    font-family: 'Roboto', serif;
+    color: #BDB4A7;
+}
+
+.modal-footer {
+    font-family: 'Roboto', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #E7871E;
+}
+
 
 

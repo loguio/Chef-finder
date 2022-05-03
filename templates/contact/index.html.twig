@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('home') }}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}Nous contacter{% endblock %}
+{% block body %}
+    <div class="app formApp">
+        {{ include('layout/navbar/index-alt.html.twig') }}
+        <div class="vh-100">
+            <div class="formContainer position-absolute w-100">
+                <div class="row h-100 mx-0">
+                    <div class="col-7 px-0 d-flex justify-content-end">
+                        <div class="formBlock col-7 mr-5 mb-2 py-2 px-5 bg-white text-center d-flex flex-column justify-content-around">
+                            <div>
+                                <div class="formTitle mt-1 text-left">Contactez-nous !</div>
+                                <div class="formSubTitle mt-1 text-left">Si vous avez des suggestions, interrogations ou réclamations, notre support est là pour y répondre !</div>
+                            </div>
+                            <div class="d-flex flex-column align-content-around">
+                                <input type="text" class="form- my-2" name="contactLastName" placeholder="Nom" required>
+                                <input type="text" class="form-control my-2" name="contactFirstName" placeholder="Prénom" required>
+                                <input type="text" class="form-control my-2" name="contactSubject" placeholder="Sujet" required>
+                                <textarea class="form-control my-2" name="contactMessage" placeholder="Message" required></textarea>
+                                <button type="submit" class="formSubmitBtn btn text-white second mt-5 mb-4 mx-auto">Envoyer</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5 px-0 d-flex">
+                        <img src="{{ asset('build/images/slides/mobile-screen.png') }}" alt="Mobile screen" title="Mobile screen"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="position-absolute pb-1 w-100" id="socialIcons" style="z-index: 1">
+            <a href="https://facebook.com" class="mx-2" title="Page Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://instagram.com" class="mx-2" title="Page Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://linkedin.com" class="mx-2" title="Page Linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://youtube.com" class="mx-2" title="Chaine Youtube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+    </div>
+{% endblock %}

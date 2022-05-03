@@ -35,9 +35,9 @@ class FoodCategory
     private ?string $picture;
 
     /**
-     * @ORM\OneToMany(targetEntity=Meal::class, mappedBy="food_category_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Meal::class, mappedBy="food_category", orphanRemoval=true)
      */
-    private $meals;
+    private Collection $meals;
 
     public function __construct()
     {

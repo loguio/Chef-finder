@@ -27,49 +27,47 @@ class Booking
      * @ORM\ManyToOne(targetEntity=Box::class, inversedBy="bookings")
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?Box $box;
+    public ?Box $box;
 
     /**
      * @ORM\OneToOne(targetEntity=Order::class, mappedBy="booking", cascade={"persist", "remove"})
      */
-    private ?Order $linkedOrder;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=UserChief::class, inversedBy="bookings")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private ?UserChief $chief;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=UserCustomer::class, inversedBy="bookings")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private ?userCustomer $customer;
+    public ?Order $linkedOrder;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private ?int $box_quantity;
+    public ?int $box_quantity;
 
     /**
      * @ORM\Column(type="date")
      */
-    private ?DateTimeInterface $date;
+    public ?DateTimeInterface $date;
 
     /**
      * @ORM\Column(type="time")
      */
-    private ?DateTimeInterface $time;
+    public ?DateTimeInterface $time;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $delivery_address;
+    public ?string $delivery_address;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $appointment_address;
+    public ?string $appointment_address;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    public ?string $customerId;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    public ?string $chiefId;
 
     public function getId(): ?int
     {
@@ -113,30 +111,6 @@ class Booking
         }
 
         $this->linkedOrder = $linkedOrder;
-
-        return $this;
-    }
-
-    public function getChief(): ?UserChief
-    {
-        return $this->Chief;
-    }
-
-    public function setChief(?UserChief $Chief): self
-    {
-        $this->Chief = $Chief;
-
-        return $this;
-    }
-
-    public function getCustomer(): ?userCustomer
-    {
-        return $this->Customer;
-    }
-
-    public function setCustomer(?userCustomer $Customer): self
-    {
-        $this->Customer = $Customer;
 
         return $this;
     }
@@ -197,6 +171,30 @@ class Booking
     public function setAppointmentAddress(string $appointment_address): self
     {
         $this->appointment_address = $appointment_address;
+
+        return $this;
+    }
+
+    public function getCustomerId(): ?string
+    {
+        return $this->customerId;
+    }
+
+    public function setCustomerId(string $customerId): self
+    {
+        $this->customerId = $customerId;
+
+        return $this;
+    }
+
+    public function getChiefId(): ?string
+    {
+        return $this->chiefId;
+    }
+
+    public function setChiefId(string $chiefId): self
+    {
+        $this->chiefId = $chiefId;
 
         return $this;
     }

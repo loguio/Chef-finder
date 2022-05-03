@@ -3,61 +3,51 @@
 namespace App\Entity;
 
 use App\Repository\UserCustomerRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserCustomerRepository::class)
  */
-class UserCustomer
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class UserCustomer implements UserInterface
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
-
+    public ?int $id;
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $firstName;
-
+    private ?string $firstName;
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $lastName;
-
+    private ?string $lastName;
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private ?string $email;
+    /**
+     * @ORM\Column(type="json")
+     */
+    private array $roles = [];
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
-
+    private ?string $password;
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $phoneNumber;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="customer", orphanRemoval=true)
-     */
-    private $bookings;
-
+    private ?string $phoneNumber;
     /**
      * @ORM\OneToOne(targetEntity=LiveViewer::class, inversedBy="userCustomer", cascade={"persist", "remove"})
      */
-    private $liveViewer;
-
-    public function __construct()
-    {
-        $this->bookings = new ArrayCollection();
-    }
+    private ?LiveViewer $liveViewer;
 
     public function getId(): ?int
     {
@@ -124,36 +114,6 @@ class UserCustomer
         return $this;
     }
 
-    /**
-     * @return Collection|Booking[]
-     */
-    public function getBookings(): Collection
-    {
-        return $this->bookings;
-    }
-
-    public function addBooking(Booking $booking): self
-    {
-        if (!$this->bookings->contains($booking)) {
-            $this->bookings[] = $booking;
-            $booking->setCustomer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBooking(Booking $booking): self
-    {
-        if ($this->bookings->removeElement($booking)) {
-            // set the owning side to null (unless already changed)
-            if ($booking->getCustomer() === $this) {
-                $booking->setCustomer(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getLiveViewer(): ?LiveViewer
     {
         return $this->liveViewer;
@@ -164,5 +124,54 @@ class UserCustomer
         $this->liveViewer = $liveViewer;
 
         return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string)$this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }

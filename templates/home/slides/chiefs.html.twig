@@ -47,7 +47,7 @@
         <div id="chiefsCarousel" class="carousel slide" data-interval="false" data-ride="carousel">
             <div class="carousel-inner">
                 {% for chief in chiefs %}
-                    <div class="carousel-item {{ loop.first ? 'active' }}" data-chief="{{ chief.firstName ~ chief.lastName }}">
+                    <div class="carousel-item {{ loop.first ? 'active' }}" data-chief="{{ chief.firstName ~ chief.lastName }}" data-chief-id="{{ chief.id }}">
                         <div class="d-flex mt-2">
                             <div class="col-7 ml-5">
                                 <div class="chiefLore bg-white px-5 py-4 text-center">

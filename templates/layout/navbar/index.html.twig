@@ -24,10 +24,17 @@
             </div>
         </div>
         <div class="d-flex align-items-center">
-            <a class="nav-item mr-4" href="{{ path('app_cart') }}" id="NavCartBtn">
-                <img src="{{ asset('build/images/layout/cart.svg') }}" alt="Panier" title="Panier">
-            </a>
-            <a class="btn my-auto px-4 py-2" id="NavLoginBtn" href="{{ path('app_customer_login') }}" title="Connexion">Connexion</a>
+            {% if app.user %}
+                <a class="nav-item mr-4" href="{{ path('app_orders') }}" id="NavOrdersBtn">
+                    <img src="{{ asset('build/images/layout/cart.svg') }}" alt="Commandes" title="Commandes">
+                </a>
+                <a class="btn validateBtn my-auto px-4 py-2" href="{{ path('app_customer_logout') }}" title="Déconnexion">Déconnexion</a>
+            {% else %}
+                <a class="nav-item mr-4" href="{{ path('app_customer_login') }}" id="NavOrdersBtn">
+                    <img src="{{ asset('build/images/layout/cart.svg') }}" alt="Commandes" title="Commandes">
+                </a>
+                <a class="btn validateBtn my-auto px-4 py-2" href="{{ path('app_customer_login') }}" title="Connexion">Connexion</a>
+            {% endif %}
         </div>
     </div>
 </nav>

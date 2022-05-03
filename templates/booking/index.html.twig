@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('home') }}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}Liste des commandes{% endblock %}
+{% block body %}
+    <style>
+        .ordersTitle {
+            font-family: Sofia Pro, serif;
+            font-style: normal;
+            font-size: 31px;
+            line-height: 113.7%;
+            color: #EFAF00;
+        }
+
+        .ordersTable::-webkit-scrollbar {
+            width: 8px !important;
+            background-color: #fff !important;
+        }
+
+        .ordersTable::-webkit-scrollbar-thumb {
+            background: #EFAF00 !important;
+            border-radius: 10px !important;
+        }
+
+        .ordersTable .table tbody tr:hover {
+            cursor: pointer;
+        }
+
+        .ordersTable tbody td, .ordersTable tbody th {
+            color: #707070;
+        }
+    </style>
+    <div class="app">
+        {{ include('layout/navbar/index.html.twig') }}
+        <div class="vh-100">
+            <div class="swpSlideContainer ordersTable overflow-auto ml-0 w-100 position-absolute formContainer">
+                <div class="ordersTitle mx-auto text-center font-weight-bold mb-3 mt-4">Liste des commandes passées</div>
+                <table class="table table-striped px-5 mt-5 table-sm table-hover mb-0 text-center" style="border-collapse: separate; border-spacing: 0">
+                    <thead class="bg-white position-sticky top-0 border-bottom border-dark" style="z-index: 1">
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Heure</th>
+                        <th scope="col">Plat</th>
+                        <th scope="col">Box</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Chef</th>
+                        <th scope="col">Adresse de livraison</th>
+                        <th scope="col">Adresse de rdv</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        <tr class="position-relative">
+                            <th scope="row">{{ order.date|date("d/m/Y") }}</th>
+                            <td>{{ order.time|date("H:i") }}</td>
+                            <td>{{ order.meal }}</td>
+                            <td>{{ order.box.name }}</td>
+                            <td>{{ order.box_quantity }}x</td>
+                            <td>{{ order.linkedOrder.price }}€</td>
+                            <td>{{ order.chiefId }}</td>
+                            <td>{{ order.deliveryAddress }}</td>
+                            <td>{{ order.appointmentAddress }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        <div class="position-absolute pb-1 w-100" id="socialIcons" style="z-index: 1">
+            <a href="https://facebook.com" class="mx-2" title="Page Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://instagram.com" class="mx-2" title="Page Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://linkedin.com" class="mx-2" title="Page Linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://youtube.com" class="mx-2" title="Chaine Youtube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+    </div>
+
+{% endblock %}
